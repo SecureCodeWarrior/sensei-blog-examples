@@ -57,7 +57,8 @@ availableFixes:
 
      */
 
-    void SKIPTHIScanWeAddTwoNumbers(){
+    @Disabled
+    void canWeAddTwoNumbers(){
         Assertions.fail("this test was skipped and should not run");
     }
 

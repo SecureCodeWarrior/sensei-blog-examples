@@ -1,0 +1,29 @@
+{
+  "header": {
+    "name": "Custom cookbook",
+    "description": "cookbook for internal use within our company",
+    "company": "SCW",
+    "appsecmail": "appsecteam@senseifinancial.com",
+    "rulepack_id": "af9ccd15-0920-4b80-a670-d10c7607d4c3",
+    "rulePackVersion": "0.1.0",
+    "enabled": true
+  },
+  "rules": [
+    {
+      "type": "947034909c9b08d0b583170e594b0eb327933231",
+      "model": {
+        "yamlCode": "search:\n  method:\n    name:\n      matches: \"SKIPTHIS.*\"\n",
+        "mver": 6,
+        "yamlQuickFixCode": "availableFixes:\n- name: \"Add @Disabled Annotation\"\n  actions:\n  - addAnnotation:\n      annotation: \"@org.junit.jupiter.api.Disabled\"\n  - rewrite:\n      to: \"{{#sed}}s/(.*) SKIPTHIS(.*)/$1 $2/,{{{.}}}{{/sed}}\"\n",
+        "ruleName": "Disable test from SKIPTHIS",
+        "ruleID": "828cddcb-9f35-4532-9f4d-ceb0b4aee171",
+        "disableRuleIDs": [],
+        "ruleShortDescription": "Stop naming methods SKIPTHIS, use @Disabled instead",
+        "ruleErrorLevel": 2,
+        "ruleEnabled": true,
+        "ruleScope": []
+      }
+    }
+  ],
+  "generators": []
+}
