@@ -23,6 +23,21 @@
         "ruleEnabled": true,
         "ruleScope": []
       }
+    },
+    {
+      "type": "947034909c9b08d0b583170e594b0eb327933231",
+      "model": {
+        "yamlCode": "search:\n  method:\n    annotation:\n      type: \"org.junit.jupiter.api.Disabled\"\n",
+        "mver": 6,
+        "yamlQuickFixCode": "availableFixes:\n- name: \"Remove Disabled and rename to SKIPTHIS...\"\n  actions:\n  - rewrite:\n      to: \"\"\n      target: \"self\"\n  - rewrite:\n      to: \"{{{ returnTypeElement }}} SKIPTHIS{{{ nameIdentifier }}}{{{ parameterList\\\n        \\ }}}{{{ body }}}\"\n",
+        "ruleName": "remove @Disabled and revert to SKIPTHIS",
+        "ruleID": "7827bdcb-1b37-4d52-9fbe-61dae52bf377",
+        "disableRuleIDs": [],
+        "ruleShortDescription": "remove @Disabled and revert to SKIPTHIS for demo purposes in the project",
+        "ruleErrorLevel": 1,
+        "ruleEnabled": true,
+        "ruleScope": []
+      }
     }
   ],
   "generators": []
