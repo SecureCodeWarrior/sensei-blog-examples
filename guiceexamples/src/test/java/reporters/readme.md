@@ -1,6 +1,6 @@
 # How to catch and fix a dependency injection issue using Sensei
 
-- Initial Author: Charlie Eriksen
+- Author Credits: Charlie Eriksen, Alan Richardson
 
 Scenario: We are learning Guice, and we keep making the simple mistake of
 forgetting to wire things up.
