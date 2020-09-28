@@ -1,4 +1,4 @@
-# System.out.println to logger
+# Converting System.out.println to logger
 
 When writing the code below I made a bunch of mistakes:
 
