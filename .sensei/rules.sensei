@@ -55,6 +55,36 @@
         "ruleEnabled": false,
         "ruleScope": []
       }
+    },
+    {
+      "type": "947034909c9b08d0b583170e594b0eb327933231",
+      "model": {
+        "yamlCode": "search:\n  methodcall:\n    name: \"println\"\n    \"on\":\n      field:\n        in:\n          class:\n            name: \"System\"\n        name: \"out\"\n",
+        "mver": 6,
+        "yamlQuickFixCode": "availableFixes:\n- name: \"use Logger\"\n  actions:\n  - rewrite:\n      to: \"logger.log(java.util.logging.Level.INFO, {{{ arguments.0 }}})\"\n  - addField:\n      field: \"java.util.logging.Logger logger \u003d Logger.getLogger({{{ containingClass.name\\\n        \\ }}}.class.getName())\"\n      target: \"parentClass\"\n",
+        "ruleName": "use logger instead of println",
+        "ruleID": "246aea6d-751f-40ed-bec7-c0ee464b4952",
+        "disableRuleIDs": [],
+        "ruleShortDescription": "use loger instead of println - remember stop using System.out.println",
+        "ruleErrorLevel": 2,
+        "ruleEnabled": true,
+        "ruleScope": []
+      }
+    },
+    {
+      "type": "947034909c9b08d0b583170e594b0eb327933231",
+      "model": {
+        "yamlCode": "search:\n  class:\n    without:\n      child:\n        field:\n          name: \"logger\"\n",
+        "mver": 6,
+        "yamlQuickFixCode": "availableFixes:\n- name: \"Add Logger\"\n  actions:\n  - addField:\n      field: \"java.util.logging.Logger logger \u003d Logger.getLogger({{{ containingClass.name\\\n        \\ }}}.class.getName())\"\n      target: \"self\"\n",
+        "ruleName": "add logger",
+        "ruleID": "9766b12a-444d-4817-95ed-d414aec8be7d",
+        "disableRuleIDs": [],
+        "ruleShortDescription": "Add logger to class",
+        "ruleErrorLevel": 0,
+        "ruleEnabled": true,
+        "ruleScope": []
+      }
     }
   ],
   "generators": []

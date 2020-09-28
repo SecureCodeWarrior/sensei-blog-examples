@@ -15,6 +15,7 @@
     <modules>
         <module>guiceexamples</module>
         <module>junitexamples</module>
+        <module>pojoexamples</module>
     </modules>
 
 

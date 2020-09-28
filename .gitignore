@@ -12,3 +12,4 @@ buildNumber.properties
 /.idea/
 /junitexamples/junitexamples.iml
 /sensei-blog-examples.iml
+/pojoexamples/pojoexamples.iml
