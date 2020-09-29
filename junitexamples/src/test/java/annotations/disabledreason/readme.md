@@ -45,7 +45,7 @@ QuickFix:
 
 ~~~~~~~~
 availableFixes:
-- name: "Add param"
+- name: "Add a todo comment parameter"
   actions:
   - rewrite:
       to: "{{{ . }}}(\"TODO: add a description here\")"

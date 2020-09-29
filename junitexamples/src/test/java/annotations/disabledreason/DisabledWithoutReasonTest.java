@@ -5,10 +5,6 @@ import org.junit.jupiter.api.Disabled;
 
 public class DisabledWithoutReasonTest {
 
-    /*
-
-
- */
     // checkstyle google checks finds no problems with this method
     // checkstyle sun checks finds no problems with this method
     // SonarLint flags this as an issue but SonarLint docs currently show examples for Junit4 rather than Junit 5
