@@ -42,23 +42,6 @@
     {
       "type": "947034909c9b08d0b583170e594b0eb327933231",
       "model": {
-        "yamlCode": "search:\n  method:\n    annotation:\n      type: \"Disabled\"\n    in:\n      class:\n        name: \"SkipThisTest\"\n",
-        "mver": 6,
-        "yamlQuickFixCode": "availableFixes:\n- name: \"Remove Disabled and rename to SKIPTHIS...\"\n  actions:\n  - rewrite:\n      to: \"\"\n      target: \"self\"\n  - rewrite:\n      to: \"{{{ returnTypeElement }}} SKIPTHIS{{{ nameIdentifier }}}{{{ parameterList\\\n        \\ }}}{{{ body }}}\"\n      target: \"self\"\n- name: \"Remove Disabled, keep other annotations, and rename to SKIPTHIS...\"\n  actions:\n  - rewrite:\n      to: \"\"\n      target: \"self\"\n  - rewrite:\n      to: \"{{#sed}}s/@Disabled/ /{{{ modifierList.modifiers }}}{{/sed}}\\n{{{ returnTypeElement\\\n        \\ }}} SKIPTHIS{{{ nameIdentifier }}}{{{ parameterList }}}{{{ body }}}\"\n      target: \"self\"\n",
-        "ruleName": "DUPE RECIPE",
-        "ruleID": "1f11e183-462a-491d-8128-d93ce3ee0286",
-        "disableRuleIDs": [
-          "7827bdcb-1b37-4d52-9fbe-61dae52bf377"
-        ],
-        "ruleShortDescription": "remove @Disabled and revert to SKIPTHIS for demo purposes in the project",
-        "ruleErrorLevel": 1,
-        "ruleEnabled": false,
-        "ruleScope": []
-      }
-    },
-    {
-      "type": "947034909c9b08d0b583170e594b0eb327933231",
-      "model": {
         "yamlCode": "search:\n  methodcall:\n    name: \"println\"\n    \"on\":\n      field:\n        in:\n          class:\n            name: \"System\"\n        name: \"out\"\n",
         "mver": 6,
         "yamlQuickFixCode": "availableFixes:\n- name: \"use Logger\"\n  actions:\n  - rewrite:\n      to: \"logger.log(java.util.logging.Level.INFO, {{{ arguments.0 }}})\"\n  - addField:\n      field: \"java.util.logging.Logger logger \u003d Logger.getLogger({{{ containingClass.name\\\n        \\ }}}.class.getName())\"\n      target: \"parentClass\"\n",
