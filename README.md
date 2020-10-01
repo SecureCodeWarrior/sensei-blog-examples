@@ -10,6 +10,15 @@ The `.sensei` folder contains example recipes which support the examples and emb
 
 This is a mixed media project so it contains `readme.md` files within the cod structure. This is help make the project easier to review and understand when viewed on Github, and using the markdown preview pane inside IntelliJ itself.
 
+Example Use Cases for Sensei:
+
+- [Converting System.out.println to using a Logger](https://github.com/SecureCodeWarrior/sensei-blog-examples/tree/master/pojoexamples/src/test/java/logging)
+- [Adding and Removing Annotations](https://github.com/SecureCodeWarrior/sensei-blog-examples/tree/master/junitexamples/src/test/java/annotations/avoidingreason)
+- [Adding Parameters to Annotations](https://github.com/SecureCodeWarrior/sensei-blog-examples/tree/master/junitexamples/src/test/java/annotations/disabledreason)
+- [Creating Library Documentation Links to Tutorials and Examples](https://github.com/SecureCodeWarrior/sensei-blog-examples/tree/master/junitexamples/src/test/java/annotations/documentationlinks) 
+
+- [Detecting Forgotten Guice Dependency Injection Wiring](https://github.com/SecureCodeWarrior/sensei-blog-examples/tree/master/guiceexamples/src/test/java/reporters)
+
 ---
 
 ## What is Sensei?

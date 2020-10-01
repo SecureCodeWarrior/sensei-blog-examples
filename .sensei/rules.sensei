@@ -113,6 +113,21 @@
         "ruleEnabled": true,
         "ruleScope": []
       }
+    },
+    {
+      "type": "947034909c9b08d0b583170e594b0eb327933231",
+      "model": {
+        "yamlCode": "search:\n  class:\n    with:\n      anyOf:\n        - child:\n            method:\n              allOf:\n                - modifier: \"public\"\n                - modifier: \"static\"\n        - child:\n            field:\n              allOf:\n                - modifier: \"static\"\n                - modifier: \"public\"\n    without:\n      child:\n        method:\n          constructor: true\n",
+        "mver": 6,
+        "yamlQuickFixCode": "availableFixes:\n- name: \"Fix the code by ...\"\n  actions:\n  - rewrite:\n      to: \"\"\n      target: \"self\"\n",
+        "ruleName": "create private constructor",
+        "ruleID": "f74ddd3f-af07-40b7-9822-fcc3e94e6c49",
+        "disableRuleIDs": [],
+        "ruleShortDescription": "create private constructor",
+        "ruleErrorLevel": 2,
+        "ruleEnabled": true,
+        "ruleScope": []
+      }
     }
   ],
   "generators": []
