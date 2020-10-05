@@ -3,7 +3,7 @@ package annotations.disabledreason;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Disabled;
 
-public class DisabledWithoutReasonTest {
+class DisabledWithoutReasonTest {
 
     // checkstyle google checks finds no problems with this method
     // checkstyle sun checks finds no problems with this method

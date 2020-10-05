@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Disabled;
 
 
-public class SkipThisTest {
+class SkipThisTest {
     
     @Deprecated
     void canWeAddTwoNumbers() {

@@ -128,6 +128,36 @@
         "ruleEnabled": true,
         "ruleScope": []
       }
+    },
+    {
+      "type": "947034909c9b08d0b583170e594b0eb327933231",
+      "model": {
+        "yamlCode": "search:\n  class:\n    with:\n      child:\n        annotation:\n          type: \"org.junit.jupiter.api.Test\"\n    modifier: \"public\"\n",
+        "mver": 6,
+        "yamlQuickFixCode": "availableFixes:\n  - name: \"remove public visibility from JUnit 5  Test class\"\n    actions:\n      - changeModifiers:\n          visibility: \"\"",
+        "ruleName": "Test Classes in JUnit 5 do not need to be public",
+        "ruleID": "7c262a8c-d2ad-41e2-b4ea-50f37129d85b",
+        "disableRuleIDs": [],
+        "ruleShortDescription": "Test Classes in JUnit 5 do not need to be public",
+        "ruleErrorLevel": 1,
+        "ruleEnabled": true,
+        "ruleScope": []
+      }
+    },
+    {
+      "type": "947034909c9b08d0b583170e594b0eb327933231",
+      "model": {
+        "yamlCode": "search:\n  method:\n    annotation:\n      type: \"org.junit.jupiter.api.Test\"\n    modifier: \"public\"",
+        "mver": 6,
+        "yamlQuickFixCode": "availableFixes:\n  - name: \"Remove @Test method public visibility\"\n    actions:\n      - changeModifiers:\n          visibility: \"\"\n",
+        "ruleName": "JUnit 5 test methods do not need to be public",
+        "ruleID": "510f6589-d609-49a4-b6a9-c9fefcaeea14",
+        "disableRuleIDs": [],
+        "ruleShortDescription": "JUnit 5 test methods do not need public visibility",
+        "ruleErrorLevel": 2,
+        "ruleEnabled": true,
+        "ruleScope": []
+      }
     }
   ],
   "generators": []

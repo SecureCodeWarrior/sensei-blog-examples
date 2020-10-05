@@ -89,7 +89,7 @@ availableFixes:
       to: "logger.log(Level.INFO, {{{ arguments.0 }}})"
 ~~~~~~~~
 
-I don't have to remember the mustache format. I used the `Show Variables` in the GUI to show me the argument and double clicked on it. Then the GUI filled in the appropriate matching moustache template.
+I don't have to remember the mustache format. I used the `Show Variables` in the GUI to show me the argument and double clicked on it. Then the GUI filled in the appropriate matching mustache template.
 
 **Insert Screenshot of the GUI with Variables**
 
@@ -136,7 +136,7 @@ availableFixes:
       target: "parentClass"
 ~~~~~~~~
 
-Note that I changed `SysOutTest` to be a moustache variable, so that it picks up the name of any class I use this recipe in. And again, I didn't remember the mustache syntax, I used the GUI `show variables` to find the replacement I needed.
+Note that I changed `SysOutTest` to be a mustache variable, so that it picks up the name of any class I use this recipe in. And again, I didn't remember the mustache syntax, I used the GUI `show variables` to find the replacement I needed.
 
 And by fully qualifying the `Logger` to `java.util.logging.Logger`, Sensei will add the import and write the line of code that I want i.e.
 

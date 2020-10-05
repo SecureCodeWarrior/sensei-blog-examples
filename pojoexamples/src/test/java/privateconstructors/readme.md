@@ -44,7 +44,7 @@ In the example class this would look like:
     private UtilityClass(){}
 ~~~~~~~~
 
-To add the above code to my class, my Quick Fix will add a Method, and the name of the method will be a Moustache template that uses the name of the class.
+To add the above code to my class, my Quick Fix will add a Method, and the name of the method will be a Mustache template that uses the name of the class.
 
 ~~~~~~~~
 availableFixes:
@@ -54,7 +54,7 @@ availableFixes:
       method: "private {{{ name }}}(){}"
 ~~~~~~~~
 
-In the GUI Editor, I use the `Show Variables` to create the Moustache template, and then edit the field to add the `private` modifier, brackets and braces to make it syntactically correct.
+In the GUI Editor, I use the `Show Variables` to create the Mustache template, and then edit the field to add the `private` modifier, brackets and braces to make it syntactically correct.
 
 And this would now allow me to add a private constructor to any class.
 
