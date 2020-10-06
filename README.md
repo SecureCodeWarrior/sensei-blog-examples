@@ -18,7 +18,7 @@ Example Use Cases for Sensei:
 - [Creating Library Documentation Links to Tutorials and Examples](https://github.com/SecureCodeWarrior/sensei-blog-examples/tree/master/junitexamples/src/test/java/annotations/documentationlinks) 
 - [Adding a Private Constructor to a Utility Class](https://github.com/SecureCodeWarrior/sensei-blog-examples/tree/master/pojoexamples/src/test/java/privateconstructors)
 - [Detecting Forgotten Guice Dependency Injection Wiring](https://github.com/SecureCodeWarrior/sensei-blog-examples/tree/master/guiceexamples/src/test/java/reporters)
-
+- [Amending Visibility Modifiers of Methods and Classes](https://github.com/SecureCodeWarrior/sensei-blog-examples/tree/master/junitexamples/src/test/java/modifier/visibility)
 ---
 
 ## What is Sensei?

@@ -2,6 +2,30 @@
 
 When I migrated from JUnit 4 to JUnit 5, I was used to writing all my test classes and methods as `public`. But with JUnit 5 they can be `package private`.
 
+e.g. instead of:
+
+```
+public class Junit5VisibilityTest {
+
+    @Test
+    public void thisDoesNotNeedToBePublic(){
+        Assertions.assertTrue(true);
+    }
+}
+```
+
+I really want to write:
+
+```
+class Junit5VisibilityTest {
+
+    @Test
+    void thisDoesNotNeedToBePublic(){
+        Assertions.assertTrue(true);
+    }
+}
+```
+
 It took me a while to build the muscle memory to code to this, and I still slip up once in a while.
 
 With Sensei I can create recipes that find the `public` methods and classes, and amend the declarations to be `package private` automatically.
