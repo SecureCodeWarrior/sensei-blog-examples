@@ -2,15 +2,23 @@
 
 Example code to be used in Sensei blog posts.
 
+TLDR; [Sensei](https://plugins.jetbrains.com/plugin/14015-sensei-by-secure-code-warrior-) is a free IntelliJ plugin from [Secure Code Warrior](https://securecodewarrior.com/) that helps you codify quality coding practices as real-time warnings in your IDE, and create Quick Fix solutions to educate you or rewrite your code.
+
+- [Download the plugin from the IntelliJ Marketplace](https://plugins.jetbrains.com/plugin/14015-sensei-by-secure-code-warrior-)
+- [Official Documentation](https://sensei-docs-beta.securecodewarrior.com/)
+
+
+## About This Project
+
 This is a Multi module maven project where modules are for different technologies and examples.
 
 If you clone this project, or download it as a zip, remember to open the top level `pom.xml` as the project.
 
 The `.sensei` folder contains example recipes which support the examples and embedded `readme.md` files. 
 
-This is a mixed media project so it contains `readme.md` files within the cod structure. This is help make the project easier to review and understand when viewed on Github, and using the markdown preview pane inside IntelliJ itself.
+This is a mixed media project, it contains `readme.md` files within the code structure. This helps make the project easier to review and understand when viewed on Github, and when using the markdown preview pane inside IntelliJ itself.
 
-Example Use Cases for Sensei:
+## Example Use Cases for Sensei
 
 - [Converting System.out.println to using a Logger](https://github.com/SecureCodeWarrior/sensei-blog-examples/tree/master/pojoexamples/src/test/java/logging)
 - [Adding and Removing Annotations](https://github.com/SecureCodeWarrior/sensei-blog-examples/tree/master/junitexamples/src/test/java/annotations/avoidingreason)
@@ -27,9 +35,9 @@ The Sensei plugin provides an easy way to find specific code patterns in your so
 
 For example, you could create a rule that matches on JUnit `@Disabled` annotations which do not have a reason, Sensei would then tell you about the issue by highlighting the code in the IDE.
 
-Additionally, when you `alt+enter` you can have the option to `Add a todo comment parameter`.
+Additionally, when you `alt+enter`, you can have the option to `Add a todo comment parameter`.
 
-When selected, this would amend the code to add a boiler plate reason, which you can then amend, and if you don’t it will show up in your TODO panel.
+When selected, this would amend the code to add a boilerplate reason, which you can then amend, and if you don’t, it will show up in your TODO panel.
 
 e.g. `@Disabled` would become ` @Disabled("TODO: add a description here")`
 
@@ -37,11 +45,11 @@ Sensei combines the functionality of a Static Analysis code scanner with a code 
 
 ## IntelliJ Intention Actions
 
-Based on the above description, the obvious alternative (if you were not using Sensei) is the IntelliJ Intention Actions functionality.
+Based on the above description, the obvious alternative (if you were not using Sensei) is to use the IntelliJ Intention Actions functionality.
 
 Sensei differs from IntelliJ Intention Actions because the aim with Sensei is to provide a way to create matchers and rewriters which are project specific, or even local to an individual developer.
 
-And we've tried to put together a GUI that makes both the matching and rewrite rules easy to write and experiment with.
+We have tried to put together a GUI that makes both the matching and rewrite rules easy to write and experiment with.
 
 ## How can it help me personally improve?
 
@@ -77,11 +85,11 @@ And we have either reminders, or actual rewrite rules, to help us write code tha
 
 ## Sensei is flexible
 
-In that way, Sensei is a bit of a mix, since it’s
+In that way, Sensei is a bit of a mix, since it’s:
 
--   a little bit of a Static Analyser   
--   a little bit of a tutor
--   a little bit of a rewrite engine
+-   part Static Analyser   
+-   part coding tutor
+-   part rewrite engine
     
 
 Sensei is flexible enough to make the job of saying "What is Sensei?" that little bit harder.
@@ -90,7 +98,7 @@ Sensei is flexible enough to make the job of saying "What is Sensei?" that littl
 
 We've tried to make Sensei the missing piece of the programmer workflow that helps you improve specific elements in your coding style, or library use, that you and your team are currently working with.
 
-This flexibility does mean that it takes a little more time to get to grips with Sensei than a static analysis tool or built in Intensions, but by spending the time to experiment, you will gain a new way to speed up your learning in your personal development process.
+This flexibility means that it takes a little more time to get to grips with Sensei than a static analysis tool or built-in intensions. Still, by spending the time to experiment, you will gain a new way to speed up your learning in your personal development process.
 
 ## How to experiment?
 
@@ -106,4 +114,4 @@ The easiest way to make Sensei work for you is to look at your coding process an
     -   You could create a Quick Fix rule to write the code for you.
     
 
-Since Sensei is designed to work alongside whatever static analysis tool you're using. If you find that the same violations are being reported from static analysis then you could replicate the condition in a Sensei recipe. And also add a Quick Fix to help train you, not just to identify the mistake, but to move quickly to writing the correct code.
+Since Sensei is designed to work alongside whatever static analysis tool you're using, if you find that the same violations are being reported from static analysis, then you could replicate the condition in a Sensei recipe. You can then add a Quick Fix to help train you, not just to identify the mistake but also to move quickly to writing the correct code.
