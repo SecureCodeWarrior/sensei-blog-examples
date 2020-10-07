@@ -98,7 +98,7 @@ Sensei is flexible enough to make the job of saying "What is Sensei?" that littl
 
 We've tried to make Sensei the missing piece of the programmer workflow that helps you improve specific elements in your coding style, or library use, that you and your team are currently working with.
 
-This flexibility means that it takes a little more time to get to grips with Sensei than a static analysis tool or built-in intensions. Still, by spending the time to experiment, you will gain a new way to speed up your learning in your personal development process.
+This flexibility means that it takes a little more time to get to grips with Sensei than a static analysis tool or the built-in IntelliJ Intensions. Still, by spending the time to experiment, you will gain a new way to speed up your learning in your personal development process.
 
 ## How to experiment?
 
