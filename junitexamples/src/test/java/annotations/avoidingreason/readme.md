@@ -179,3 +179,15 @@ I could clone the recipe, but if I do, then I have to remember to uncheck the "A
 Since both fixes are available from the same search, I will make them actions on the same recipe.
 
 
+## Nested `sed` calls
+
+I was lucky that I could match both the `@Disabled` and `@Test` in a single search and replace.
+
+If I wanted to have a sequence of sed commands then I would nest them:
+
+```
+{{#sed}}s/@Test//,{{#sed}}s/@Disabled\n//,{{{ modifierList }}}{{/sed}}{{/sed}}
+```
+
+In the above example I apply the `@Test` replacement to the results of applying the `@Disabled` replacement on the `{{{ modifierList }}}`.
+
