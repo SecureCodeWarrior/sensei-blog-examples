@@ -5,9 +5,9 @@ import org.junit.jupiter.api.Disabled;
 
 
 class SkipThisTest {
-    
-    @Deprecated
-    void canWeAddTwoNumbers() {
+
+    @Disabled
+    void canWeAddTwoNumbers(){
         Assertions.fail("this test was skipped and should not run");
     }
 
