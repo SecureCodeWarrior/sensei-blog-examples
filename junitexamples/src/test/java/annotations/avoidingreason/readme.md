@@ -2,7 +2,7 @@
 
 - Demonstrate method name matching with regex
 - Demonstrate use of SED to rewrite method contents
-- TODO: 'alternatives' without using SED use other method attributes from variables list
+- Demonstrate use of mustache variables to rewrite method contents
 
 
 When I was learning JUnit, I could only keep so much in my head at any one time
@@ -123,9 +123,6 @@ availableFixes:
 - name: "Remove Disabled and rename to SKIPTHIS..."
   actions:
   - rewrite:
-      to: ""
-      target: "self"
-  - rewrite:
       to: "{{{ returnTypeElement }}} SKIPTHIS{{{ nameIdentifier }}}{{{ parameterList\
         \ }}}{{{ body }}}"
 ~~~~~~~~
@@ -145,17 +142,11 @@ availableFixes:
 - name: "Remove Disabled and rename to SKIPTHIS..."
   actions:
   - rewrite:
-      to: ""
-      target: "self"
-  - rewrite:
       to: "{{{ returnTypeElement }}} SKIPTHIS{{{ nameIdentifier }}}{{{ parameterList\
         \ }}}{{{ body }}}"
       target: "self"
 - name: "Remove Disabled, keep other annotations, and rename to SKIPTHIS..."
   actions:
-  - rewrite:
-      to: ""
-      target: "self"
   - rewrite:
       to: "{{#sed}}s/(@Disabled\n.*@Test)//,{{{ modifierList }}}{{/sed}}\n\
         {{{ returnTypeElement }}} SKIPTHIS{{{ nameIdentifier }}}{{{ parameterList\
