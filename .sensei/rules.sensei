@@ -14,11 +14,11 @@
       "model": {
         "yamlCode": "search:\n  method:\n    name:\n      matches: \"SKIPTHIS.*\"\n",
         "mver": 6,
-        "yamlQuickFixCode": "availableFixes:\n- name: \"Add @Disabled Annotation\"\n  actions:\n  - addAnnotation:\n      annotation: \"@org.junit.jupiter.api.Disabled\"\n  - rewrite:\n      to: \"{{#sed}}s/(.*) SKIPTHIS(.*)/$1 $2/,{{{.}}}{{/sed}}\"\n",
-        "ruleName": "Disable test from SKIPTHIS",
+        "yamlQuickFixCode": "availableFixes:\n- name: \"Add @Disabled and @Test Annotation\"\n  actions:\n  - addAnnotation:\n      annotation: \"@org.junit.jupiter.api.Test\"\n  - addAnnotation:\n      annotation: \"@org.junit.jupiter.api.Disabled\"\n  - rewrite:\n      to: \"{{#sed}}s/(.*) SKIPTHIS(.*)/$1 $2/,{{{.}}}{{/sed}}\"\n",
+        "ruleName": "Make @Disabled @Test from SKIPTHIS",
         "ruleID": "828cddcb-9f35-4532-9f4d-ceb0b4aee171",
         "disableRuleIDs": [],
-        "ruleShortDescription": "Stop naming methods SKIPTHIS, use @Disabled instead",
+        "ruleShortDescription": "Stop naming methods SKIPTHIS, use @Disabled @Test instead",
         "ruleErrorLevel": 2,
         "ruleEnabled": true,
         "ruleScope": []
@@ -29,7 +29,7 @@
       "model": {
         "yamlCode": "search:\n  method:\n    annotation:\n      type: \"Disabled\"\n    in:\n      class:\n        name: \"SkipThisTest\"\n",
         "mver": 6,
-        "yamlQuickFixCode": "availableFixes:\n- name: \"Remove Disabled and rename to SKIPTHIS...\"\n  actions:\n  - rewrite:\n      to: \"\"\n      target: \"self\"\n  - rewrite:\n      to: \"{{{ returnTypeElement }}} SKIPTHIS{{{ nameIdentifier }}}{{{ parameterList\\\n        \\ }}}{{{ body }}}\"\n      target: \"self\"\n- name: \"Remove Disabled, keep other annotations, and rename to SKIPTHIS...\"\n  actions:\n  - rewrite:\n      to: \"\"\n      target: \"self\"\n  - rewrite:\n      to: \"{{#sed}}s/@Deprecated\\\\n//,{{#encodeString}}{{{ modifierList }}}{{/encodeString}}{{/sed}}\\n\\\n        {{{ returnTypeElement }}} SKIPTHIS{{{ nameIdentifier }}}{{{ parameterList\\\n        \\ }}}{{{ body }}}\"\n      target: \"self\"\n",
+        "yamlQuickFixCode": "availableFixes:\n- name: \"Remove Disabled and rename to SKIPTHIS...\"\n  actions:\n  - rewrite:\n      to: \"\"\n      target: \"self\"\n  - rewrite:\n      to: \"{{{ returnTypeElement }}} SKIPTHIS{{{ nameIdentifier }}}{{{ parameterList\\\n        \\ }}}{{{ body }}}\"\n      target: \"self\"\n- name: \"Remove Disabled, keep other annotations, and rename to SKIPTHIS...\"\n  actions:\n  - rewrite:\n      to: \"\"\n      target: \"self\"\n  - rewrite:\n      to: \"{{#sed}}s/(@Disabled\\\\n.*@Test)//,{{{ modifierList }}}{{/sed}}\\n\\n{{{ returnTypeElement\\\n        \\ }}} SKIPTHIS{{{ nameIdentifier }}}{{{ parameterList }}}{{{ body }}}\"\n      target: \"self\"\n",
         "ruleName": "in SkipThisTest remove @Disabled and revert to SKIPTHIS",
         "ruleID": "7827bdcb-1b37-4d52-9fbe-61dae52bf377",
         "disableRuleIDs": [],

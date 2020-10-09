@@ -6,9 +6,30 @@
 
 
 When I was learning JUnit, I could only keep so much in my head at any one time
-and I constantly forgot out to skip tests when they were not working. I had to train
-myself to use `@Disabled`
-instead I used to rename the test and removed the @Test annotation.
+and I constantly forgot how to skip tests when they were not working.
+
+Ideally I would write:
+
+~~~~~~~~
+    @Disabled
+    @Test
+    void canWeAddTwoNumbers(){
+        Assertions.fail("this test was skipped and should not run");
+    }
+~~~~~~~~
+
+I had to train myself to use `@Disabled`.
+
+When I forgot, I would instead rename the test and remove the `@Test` annotation.
+
+~~~~~~~~
+class SkipThisTest {
+
+    void SKIPTHIScanWeAddTwoNumbers(){
+        Assertions.fail("this test was skipped and should not run");
+    }   
+}
+~~~~~~~~
 
 It wasn't good, but it got the job done. If only I'd had something like Sensei
 where I could have created a rule to help me remember. That's what this example
@@ -16,8 +37,7 @@ is all about.
 
 Task:
 
-Create a rule which finds methods which have been 'skipped' or 'disabled'
-then create a quickfix which renames the method and adds an @Test annotation.
+Create a rule which finds methods which have been 'skipped' or 'disabled' by renaming the method and then create a quickfix which renames the method and adds an `@Test` and `@Disabled` annotation.
 
 
 Notes:
@@ -26,6 +46,9 @@ Notes:
 - Adding the annotation as a fully qualified class path will also add an `import` statement
 
 ## Recipe Settings
+
+- `Name: Make @Disabled @Test from SKIPTHIS`
+- `Short Description: Stop naming methods SKIPTHIS, use @Disabled @Test instead`
 
 ~~~~~~~~
 search:
@@ -39,16 +62,28 @@ search:
 
 ~~~~~~~~
 availableFixes:
-- name: "Add @Disabled annotation"
+- name: "Add @Disabled and @Test Annotation"
   actions:
   - addAnnotation:
-      annotation:
-        java: "@org.junit.jupiter.api.Disabled"
-        kotlin: ""
+       annotation: "@org.junit.jupiter.api.Test"
+  - addAnnotation:
+      annotation: "@org.junit.jupiter.api.Disabled"
   - rewrite:
-      to:
-        java: "{{#sed}}s/(.*) SKIPTHIS(.*)/$1 $2/,{{{.}}}{{/sed}}"
+       to: "{{#sed}}s/(.*) SKIPTHIS(.*)/$1 $2/,{{{.}}}{{/sed}}"
 ~~~~~~~~
+
+The QuickFix that I created:
+
+- adds two annotations, both are fully qualified to bring in the associated import statements
+- uses `sed` to rewrite the method name
+
+The `sed` implementation:
+
+- takes two arguments separated by `,`
+- the first argument is the  sed command
+- the second argument is the text to apply the command to
+- requires that when the arguments themselves contain commas, that they are warpped with `{{#encodeString}}` and `{{/encodeString}}`
+    - e.g. `{{#encodeString}}{{{.}}}{{/encodeString}}`
 
 # Reverse Recipe
 
@@ -56,7 +91,7 @@ Reversing out the above change.
 
 Since we can use this in demos we may want to reverse it.
 
-And we might choose to do that through a Git revert or a bunch of Ctrl+Z
+And we might choose to do that through a Git revert or a bunch of `Ctrl+Z`
 
 Or we could create a recipe.
 
@@ -95,11 +130,9 @@ availableFixes:
         \ }}}{{{ body }}}"
 ~~~~~~~~
 
-I basically add every variable except the modifier (since I want to get rid of the annotation),
-and add the SKIPTHIS text into the template.
+I basically add every variable except the modifier (since I want to get rid of the annotations), and add the `SKIPTHIS` text into the template.
 
-This makes it easy to revert the changes during a demo, and it is isolated to this demo class,
-and has the side-effect of highlighting the code we are working on in the demo.
+This makes it easy to revert the changes during a demo, because it is isolated to this demo class, and has the side-effect of highlighting the code we are working on in the demo.
 
 One weakness with this, is that by removing the modifiers, I removed any other annotations as well.
 
@@ -124,7 +157,7 @@ availableFixes:
       to: ""
       target: "self"
   - rewrite:
-      to: "{{#sed}}s/@Deprecated\\n//,{{#encodeString}}{{{ modifierList }}}{{/encodeString}}{{/sed}}\n\
+      to: "{{#sed}}s/(@Disabled\n.*@Test)//,{{{ modifierList }}}{{/sed}}\n\
         {{{ returnTypeElement }}} SKIPTHIS{{{ nameIdentifier }}}{{{ parameterList\
         \ }}}{{{ body }}}"
       target: "self"
@@ -133,12 +166,13 @@ availableFixes:
 Here, I am adding an additional line in the Quick Fix.
 
 ~~~~~~~~
-{{#sed}}s/@Deprecated\\n//,{{#encodeString}}{{{ modifierList }}}{{/encodeString}}{{/sed}}
+{{#sed}}s/(@Disabled\n.*@Test)//,{{{ modifierList }}}{{/sed}}
 ~~~~~~~~
 
-This takes the modifier list, encodes it as a string, then uses sed to remove the line with `@Deprecated` from the string, but leave all other lines in the modifier, i.e. all other annotations, alone.
+This takes the modifier list, encodes it as a string, then uses `sed` to remove the line with `@Disabled` from the string, but leave all other lines in the modifier, i.e. all other annotations, alone.
 
-NOTE: Remember to add the "," in the sed, otherwise you will see a comment added to your preview.
+
+NOTE: Remember to add the "," in the `sed`, otherwise you will see a comment added to your preview, because this is how Sensei alerts you to syntax errors in the `sed` command.
 
 I could clone the recipe, but if I do, then I have to remember to uncheck the "Add disable entry for cloned recipe" checkbox when I do, otherwise only the cloned recipe will be available for use.
 
