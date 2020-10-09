@@ -15,9 +15,11 @@ import org.junit.jupiter.api.Test;
     - an `@Test` annotation on the method
     - and an `@Disabled` annotation on the method
 
-    Create a recipe which finds all `SKIPTHIS.*` methods.
 
-    With an associated quick fix which amends
+    Create a recipe:
+
+    - Which finds all `SKIPTHIS.*` methods.
+    - With an associated quick fix which amends
     the method name, and adds the annotations.
 
  */
