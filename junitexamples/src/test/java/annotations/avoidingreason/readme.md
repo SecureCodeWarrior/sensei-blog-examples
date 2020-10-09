@@ -98,6 +98,11 @@ Or we could create a recipe.
 Thinking it through I want to find a method annotated with @Disabled
 but only in the class SkipThisTest where I do the demo:
 
+
+- `Name: in SkipThisTest remove @Disabled and revert to SKIPTHIS`
+- `Short Description: remove @Disabled and revert to SKIPTHIS for demo purposes in the project`
+- `Level: warning`
+
 Recipe Settings Search
 
 ~~~~~~~~
