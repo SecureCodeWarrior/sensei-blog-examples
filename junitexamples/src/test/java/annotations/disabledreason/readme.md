@@ -6,20 +6,35 @@
 Disabled tests without a reason can prove problematic over the long term
 because we forget why we disabled it.
 
+```
+@Disabled
+void thisTestMethodHasNoDisabledReason(){
+    Assertions.fail("This test is disabled and should not run");
+}
+```
+
 Over time the code base moves on, the test is not kept in step with
 the code so eventually becomes redundant.
 
-It is generally a good idea to add a description.
+It is generally a good idea to add an explanatory description as the annotation parameter.
 
-We can write a rule for that, and a Quick Fix that reminds us to add the actual description.
+```
+@Disabled("Disabled to demonstrate adding a reason")
+void thisTestMethodHasDisabledReason(){
+    Assertions.fail("This test is disabled and should not run");
+}
+```
 
-Task:
+## A Sensei Recipe
 
+We can write a recipe to detect when `@Disabled` is used with no explanation, and a Quick Fix that reminds us to add the actual explantation.
+
+### Task:
 - match the Disabled annotation without any parameters
 - change the Disabled annotation to have a parameter with marker text "TODO: add a description here"
 
 
-Solution:
+### Solution
 
 General
 
