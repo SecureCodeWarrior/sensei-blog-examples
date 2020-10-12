@@ -36,7 +36,9 @@ We can write a recipe to detect when `@Disabled` is used with no explanation, an
 
 ### Solution
 
-General
+I use `Alt+Enter` to Create a new Recipe and add the basic descriptive text.
+
+General:
 
 ~~~~~~~~
 name: remember to add disabled description
@@ -44,8 +46,15 @@ short description: @Disabled should really have a description explaining why
 Level: Error
 ~~~~~~~~
 
+In the recipe editor, I change the Search to match an annotation.
 
-Search
+This will highlight all annotations in the preview.
+
+Having done that, I want to filter on the `type'. I could just use `Disabled` but I fully qualify the class with the package so that it only matches the annotation from JUnit 5. Because the preview is displayed, I can easily copy and paste this from the code.
+
+I then want to match only annotations without Parameters, and I can use the GUI to do that.
+
+i.e. Search:
 
 ~~~~~~~~
 search:
@@ -56,7 +65,11 @@ search:
       - {}
 ~~~~~~~~
 
-QuickFix:
+For my QuickFix I will use a rewrite action.
+
+I use the `Show Variables` functionality to show me the Mustache variables and preview the contents. And then I add the extra code needed to create the place marker comment.
+
+i.e. QuickFix:
 
 ~~~~~~~~
 availableFixes:
