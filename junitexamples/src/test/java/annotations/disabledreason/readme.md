@@ -1,7 +1,13 @@
-## Adding Parameters to Annotations
+## Adding Parameters to Annotations Using Rewrite Actions
 
-- Demonstrate matching annotations
-- Amending annotation using template
+In this example we will:
+
+- Demonstrate searching and matching annotations.
+- Amending annotations using mustache templates.
+
+Sensei provides the ability to match problematic code patterns and then amend them to agreed implementations. In this example I am using `@Disabled` without a parameter as the problematic code pattern.
+
+## Disabled Test Annotation
 
 Disabled tests without a reason can prove problematic over the long term
 because we forget why we disabled it.
@@ -13,10 +19,9 @@ void thisTestMethodHasNoDisabledReason(){
 }
 ```
 
-Over time the code base moves on, the test is not kept in step with
-the code so eventually becomes redundant.
+The risk is that, over time the code base moves on, the disabled test is not updated in step with the purpose of the code and eventually becomes redundant and irrelevant, and potentially never re-enabled.
 
-It is generally a good idea to add an explanatory description as the annotation parameter.
+During code reviews, we will often point out that it is a good idea to add an explanatory description as the annotation parameter.
 
 ```
 @Disabled("Disabled to demonstrate adding a reason")
@@ -27,16 +32,19 @@ void thisTestMethodHasDisabledReason(){
 
 ## A Sensei Recipe
 
-We can write a recipe to detect when `@Disabled` is used with no explanation, and a Quick Fix that reminds us to add the actual explantation.
+We can write a recipe to detect when `@Disabled` is added without explanation and a Quick Fix that reminds us to add the actual explanation.
 
-### Task:
-- match the Disabled annotation without any parameters
-- change the Disabled annotation to have a parameter with marker text "TODO: add a description here"
+### Task
+
+When I think about what I'm going to do, I have to:
+
+- match the `Disabled` annotation without any parameters
+- change the `Disabled` annotation to have a parameter with marker text "TODO: add a description here"
 
 
 ### Solution
 
-I use `Alt+Enter` to Create a new Recipe and add the basic descriptive text.
+I use `Alt+Enter` to Create a new Recipe and add the basic descriptive text in the general information.
 
 General:
 
@@ -50,7 +58,7 @@ In the recipe editor, I change the Search to match an annotation.
 
 This will highlight all annotations in the preview.
 
-Having done that, I want to filter on the `type'. I could just use `Disabled` but I fully qualify the class with the package so that it only matches the annotation from JUnit 5. Because the preview is displayed, I can easily copy and paste this from the code.
+Having done that, I want to filter on the `type`. I could just use `Disabled` but I fully qualify the class with the package so that it only matches the annotation from JUnit 5. Because the preview is displayed, I can easily copy and paste this from the code.
 
 I then want to match only annotations without Parameters, and I can use the GUI to do that.
 
@@ -80,3 +88,8 @@ availableFixes:
       target: "self"
 ~~~~~~~~
 
+## Summary
+
+When building a rewrite Quick Fix, it is easier when we can search for the code element that we want to rewrite, because it is then the `self` entity we can act on.
+
+In this example, I used a rewrite action to amend the Annotation. Rewrite is a general-purpose action that can apply to any code element and is a good default to explore.

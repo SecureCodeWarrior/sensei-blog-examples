@@ -75,10 +75,10 @@
         "yamlCode": "search:\n  annotation:\n    type: \"org.junit.jupiter.api.Disabled\"\n    without:\n      parameters:\n        - {}\n",
         "mver": 6,
         "yamlQuickFixCode": "availableFixes:\n  - name: \"Add a todo comment parameter\"\n    actions:\n      - rewrite:\n          to: \"{{{ . }}}(\\\"TODO: add a description here\\\")\"\n          target: \"self\"\n",
-        "ruleName": "Add a todo comment",
+        "ruleName": "remember to add disabled description",
         "ruleID": "345f6a51-012f-4613-aac2-c606fa67395a",
         "disableRuleIDs": [],
-        "ruleShortDescription": "You should add a todo comment parameter",
+        "ruleShortDescription": "@Disabled should really have a description explaining why",
         "ruleErrorLevel": 1,
         "ruleEnabled": true,
         "ruleScope": []
