@@ -20,13 +20,22 @@ This is a mixed media project, it contains `readme.md` files within the code str
 
 ## Example Use Cases for Sensei
 
+### POJO
+
 - [Converting System.out.println to using a Logger](pojoexamples/src/test/java/logging)
+- [Adding a Private Constructor to a Utility Class](pojoexamples/src/test/java/privateconstructors)
+
+### JUnit 5
+
 - [Adding and Removing Annotations](junitexamples/src/test/java/annotations/avoidingreason)
 - [Adding Parameters to Annotations](junitexamples/src/test/java/annotations/disabledreason)
 - [Creating Library Documentation Links to Tutorials and Examples](junitexamples/src/test/java/annotations/documentationlinks) 
-- [Adding a Private Constructor to a Utility Class](pojoexamples/src/test/java/privateconstructors)
-- [Detecting Forgotten Guice Dependency Injection Wiring](guiceexamples/src/test/java/reporters)
 - [Amending Visibility Modifiers of Methods and Classes](junitexamples/src/test/java/modifier/visibility)
+
+### Guice
+
+- [Detecting Forgotten Guice Dependency Injection Wiring](guiceexamples/src/test/java/reporters)
+
 ---
 
 ## What is Sensei?
