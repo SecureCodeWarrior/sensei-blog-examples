@@ -7,7 +7,7 @@ import java.util.List;
 class CountReporter {
 
     @Inject
-    private static ILineReporter reporter;
+    static ILineReporter reporter;
 
     int count=0;
 

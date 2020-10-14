@@ -158,6 +158,21 @@
         "ruleEnabled": true,
         "ruleScope": []
       }
+    },
+    {
+      "type": "947034909c9b08d0b583170e594b0eb327933231",
+      "model": {
+        "yamlCode": "search:\n  field:\n    with:\n      annotation:\n        type: \"com.google.inject.Inject\"\n      in:\n        class:\n          without:\n            modifier: \"public\"\n",
+        "mver": 6,
+        "yamlQuickFixCode": "availableFixes:\n- name: \"Change class to public. Remember to also request injection on this class\"\n  actions:\n  - changeModifiers:\n      visibility: \"public\"\n      target: \"parentClass\"\n",
+        "ruleName": "Guice Injected Field Not Public",
+        "ruleID": "3b474a4c-c3e2-4325-bc71-e6b1ba3e2543",
+        "disableRuleIDs": [],
+        "ruleShortDescription": "If the Injected field is not public then the code might not be wired up.",
+        "ruleErrorLevel": 1,
+        "ruleEnabled": true,
+        "ruleScope": []
+      }
     }
   ],
   "generators": []

@@ -28,6 +28,7 @@ public class StaticInjectionIssueTest {
             System.out.println(
                     "TODO: fix the dependency injection issue -" +
                     " private protected class, and missing static injection");
+            //Assertions.fail("dependency injection failed");
         }
     }
 }
