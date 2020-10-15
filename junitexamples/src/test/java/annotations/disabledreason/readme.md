@@ -1,15 +1,15 @@
 ## Adding Parameters to Annotations Using Rewrite Actions
 
-In this example we will:
+In this example, we will:
 
 - Demonstrate searching and matching annotations.
-- Amending annotations using mustache templates.
+- Amend annotations using mustache templates.
 
 Sensei provides the ability to match problematic code patterns and then amend them to agreed implementations. In this example I am using `@Disabled` without a parameter as the problematic code pattern.
 
 ## Disabled Test Annotation
 
-Disabled tests without a reason can prove problematic over the long term
+Disabled tests without a specified reason can prove problematic over the long term
 because we forget why we disabled it.
 
 ```
@@ -19,7 +19,7 @@ void thisTestMethodHasNoDisabledReason(){
 }
 ```
 
-The risk is that, over time the code base moves on, the disabled test is not updated in step with the purpose of the code and eventually becomes redundant and irrelevant, and potentially never re-enabled.
+The risk is that, over time, the code base moves on, the disabled test is not updated in step with the purpose of the code and eventually becomes redundant and irrelevant, and potentially never re-enabled.
 
 During code reviews, we will often point out that it is a good idea to add an explanatory description as the annotation parameter.
 
@@ -32,7 +32,7 @@ void thisTestMethodHasDisabledReason(){
 
 ## A Sensei Recipe
 
-We can write a recipe to detect when `@Disabled` is added without explanation and a Quick Fix that reminds us to add the actual explanation.
+We can write a recipe to detect when `@Disabled` is added without explanation and a Quick Fix that reminds us to add the actual reason explaining why we disabled it.
 
 ### Task
 
