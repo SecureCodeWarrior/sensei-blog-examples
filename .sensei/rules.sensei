@@ -173,6 +173,21 @@
         "ruleEnabled": true,
         "ruleScope": []
       }
+    },
+    {
+      "type": "947034909c9b08d0b583170e594b0eb327933231",
+      "model": {
+        "yamlCode": "search:\n  methodcall:\n    args:\n      1:\n        containsUntrustedInput: true\n        type: \"java.lang.String\"\n    name: \"executeQuery\"\n    type: \"java.sql.Statement\"\n",
+        "mver": 6,
+        "yamlQuickFixCode": "availableFixes:\n- name: \"convert to a prepared statement\"\n  actions:\n  - parameterize:\n      placeholderFormat: \"?\"\n      extractUntrustedInput:\n        methodsOnObject:\n          methods:\n          - methodName: \"setString\"\n            args:\n              \"1\": \"{{{ index }}}\"\n              \"2\": \"{{{ . }}}\"\n          target:\n            subject:\n              insertBefore: true\n  - changeTypeOfCallObject:\n      rewriteLastAssignment: \"{{{ qualifier }}}.prepareStatement({{{ markedElement.arguments.0}}}{{#arguments}},\\\n        \\ {{{.}}}{{/arguments}})\"\n      type: \"java.sql.PreparedStatement\"\n  - modifyArguments:\n      remove:\n      - 1\n",
+        "ruleName": "sql injection - use a parameterized query",
+        "ruleID": "4b70352d-5a1f-4e76-858b-33843b510de8",
+        "disableRuleIDs": [],
+        "ruleShortDescription": "execute query with untrusted inputs is vulnerable to SQL Injection",
+        "ruleErrorLevel": 2,
+        "ruleEnabled": true,
+        "ruleScope": []
+      }
     }
   ],
   "generators": []

@@ -6,6 +6,7 @@ import tododb.MyDB;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 public class MyFirstDBTest {
 
@@ -20,11 +21,10 @@ public class MyFirstDBTest {
     void myFirstSelect() throws SQLException {
 
         String doneStatus = "1";
-        ResultSet rs = myDB.getTodosOfStatus(doneStatus);
+        List<String> descriptions = myDB.getTodosOfStatus(doneStatus);
 
-        Assertions.assertTrue(rs.next());
-        Assertions.assertEquals("I did that activity", rs.getString("description"));
-
+        Assertions.assertEquals(1, descriptions.size());
+        Assertions.assertEquals("I did that activity", descriptions.get(0));
     }
 
     @Test
@@ -34,10 +34,11 @@ public class MyFirstDBTest {
         String doneStatus = "-1 UNION SELECT name || '~' || password as description from users";
 
         // TODO: fix the SQL Injection issue in the DBApi
-        ResultSet rs = myDB.getTodosOfStatus(doneStatus);
+        List<String> descriptions = myDB.getTodosOfStatus(doneStatus);
 
-        Assertions.assertTrue(rs.next());
-        Assertions.assertEquals("admin~root", rs.getString("description"));
+        Assertions.assertEquals(2, descriptions.size());
+        Assertions.assertEquals("admin~root", descriptions.get(0));
+        Assertions.assertEquals("bob~dobbs", descriptions.get(1));
 
     }
 }

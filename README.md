@@ -111,7 +111,7 @@ This flexibility means that it takes a little more time to get to grips with Sen
 
 ## How to experiment?
 
-Once you have downloaded and installed Sensei from the [Intellij Marketplace](https://plugins.jetbrains.com/plugin/14015).
+Once you have downloaded and installed Sensei from the [Intellij Marketplace](https://plugins.jetbrains.com/plugin/14015), we recommend installing via the plugins manager in IntelliJ preferences (just search for 'Sensei secure code' and you'll find it).
 
 The easiest way to make Sensei work for you is to look at your coding process and consider:
 
