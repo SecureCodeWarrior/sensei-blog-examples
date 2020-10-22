@@ -14,23 +14,23 @@ With Java, we have JavaDoc comments, which can have a `see` annotation:
  */
 ```
 
-JavaDoc like this is a great help when 3rd party libraries use this because we can use the `Quick Documentation` functionality in IntelliJ to have access to more detailed examples. 
+JavaDoc like this in 3rd party libraries is a great help because we can use the `Quick Documentation` functionality in IntelliJ to have access to more detailed examples. 
 
-But, we all know that comments don't get updated as often as code, and web presence maintenance is often disconnected from library maintenance, or performed by a different team entirely.
+But, we all know that comments don't get updated as often as code, and web presence maintenance is often disconnected from library maintenance and sometimes performed by a different team entirely.
 
 ## How Sensei Helps
 
-Sensei provides the ability to match on library annotations and methods and provide additional documentation and links to long form documentation on a wiki or third party tutorial sites.
+Sensei provides the ability to match on library annotations and methods to provide links to long form documentation on a wiki or third party tutorial site.
 
-As an example I'm using the `@Test` annotation from JUnit.
+As an example, I'm using the `@Test` annotation from JUnit.
      
 The JavaDoc is very detailed, and the `Quick Documentation` view explains how to use the annotation.
 
-But the official documentation on the web site is often easier to read, and has examples.
+But the official documentation on the web site is often easier to read and has more examples.
 
-When a team are learning a library, having a set of recommended tutorials, can be very useful.
+When a team starts learning a library, having a set of recommended tutorials, can be very useful.
 
-Sensei has a `goto` action which can open a URL, allowing us to link to external sites and examples for documentation that we, as a team, find useful.      
+Sensei has a `goto` action that can open a URL, allowing us to link to external sites and examples for documentation that we, as a team, find useful.      
         
 ## Implementing the Goto URL        
         
@@ -70,7 +70,7 @@ availableFixes:
 
 I might choose to have multiple Actions so that each URL or tutorial has its own option in the `alt+enter` Quick Fix pop up menu.
 
-For example, for the `@Parameterized` annotation, I might want to link to the official documentation, and a set of online example code.
+For example, for the `@Parameterized` annotation, I might want to link to the official documentation and a set of online example code.
 
 - https://junit.org/junit5/docs/current/user-guide/#writing-tests-parameterized-tests
 - https://github.com/eviltester/junitexamples/blob/master/src/test/java/parameterized/junit5/InitialExampleTest.java
@@ -85,7 +85,7 @@ search:
     type: "org.junit.jupiter.params.ParameterizedTest"
 ```
 
-And links to the sites I identified as being useful:
+And links off to the sites I identified as being useful:
 
 ```
 availableFixes:
@@ -101,11 +101,11 @@ availableFixes:
       value: "https://junit.org/junit5/docs/current/user-guide/#writing-tests-classes-and-methods"
 ```
 
-Both links would then appear in the pop up dialog.
+Both links would then appear in the pop-up dialog.
 
 ## Who would benefit?
 
-I would have found this useful when working and learning libraries, especially when leading teams and helping them adopt a new library.
+I would have found this useful when using and learning libraries, especially when leading teams and helping them adopt a new library.
 
 This could also benefit teams creating libraries, by creating a standard set of documentation recipes to help guide people through the adoption of the library or new features in the library.
 

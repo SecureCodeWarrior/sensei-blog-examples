@@ -33,13 +33,9 @@ And I realised I really need to learn how to use a logger.
 
 ## Research
 
-After a little research, I decided to use:
+Fortunately I read through the [Sensei documentation](https://sensei-docs-beta.securecodewarrior.com/index.html) and decided to use the "Getting Started" guide to help me create a recipe to convert from `System.out.println` and encourage me to use a logger:
 
-`java.util.logging.Logger`
-
-I'm keeping my code simple and using logging without any additional dependencies.
-
-And instead of `System.out.println` I should `logger.log`
+- `java.util.logging.Logger`
 
 ## Creating a Recipe
 
