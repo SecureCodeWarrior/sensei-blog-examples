@@ -124,3 +124,102 @@ The easiest way to make Sensei work for you is to look at your coding process an
     
 
 Since Sensei is designed to work alongside whatever static analysis tool you're using, if you find that the same violations are being reported from static analysis, then you could replicate the condition in a Sensei recipe. You can then add a Quick Fix to help train you, not just to identify the mistake but also to move quickly to writing the correct code.
+
+---
+
+# Sensei Team Support
+
+When one person creates a recipe to improve their code quality or productivity, everyone on the team can benefit when the cookbooks are shared.
+
+Sensei provides a number of mechanisms for sharing cookbooks:
+
+- Store Cookbooks in the Project Under Version Control
+- Storing Cookbooks in a shared folder
+- Store Cookbooks in Github
+- Zipped files over HTTP(s)
+
+By sharing the cookbooks, Sensei helps teams collaborate on knowledge sharing. The collaboration helps improve communication and embed the agreed code quality approaches.
+
+For example, sharing a cookbook allows:
+
+team members to share useful recipes with each other.
+team leads to codify agreed coding practices for junior staff. To identify common violations with a quick fix for the agreed version.
+increased Inter-team co-operation. An AppSec team might create recipes to highlight a problem in the code, and the development team could write the quick fix.
+
+The next few sections explain how to implement each of the sharing mechanisms.
+
+## Store Cookbooks in the Project Under Version Control
+
+The project `.sensei` folder is the default option when creating a cookbook file.
+
+- `project://.sensei’
+
+All cookbooks and recipes would be stored in a `.sensei` folder in your project. 
+
+The easiest approach to sharing is to add the project `.sensei` folder to version control.
+
+Then the `.sensei` folder can be managed like any other shared code artifact associated with the project. The cookbooks are stored as YAML configuration, making them easy to merge during any commit and review process.
+
+This is the approach taken for the public `sensei-blog-examples` project.
+
+https://github.com/SecureCodeWarrior/sensei-blog-examples
+
+The `.sensei` folder contains the cookbook with all the recipes, and they are available to anyone that clones the repository.
+
+## Store Cookbooks in Any Folder
+
+Teams can also use cookbooks stored in central locations.
+
+Saving the cookbook to any folder with shared write access permissions will allow the whole team to update the recipes, and import them into any project that they happen to be working on.
+
+The location would be set to the directory path.
+
+## Store Recipes in Github
+
+Sensei can also access recipes that are stored in a Github repo. Both private and public repositories are supported.
+
+### Github over SSH
+
+SSH Repository access is configured using the following syntax for the `Location`
+
+`git@github.com:SecureCodeWarrior/acookbook.git`
+
+For this to work, the repository would contain the contents of a cookbook folder.
+
+It is also possible to configure the branch and the subfolder for the cookbook e.g. in the `master` branch in the `cookbook` subfolder
+
+e.g.
+
+- `git@github.com:SecureCodeWarrior/sensei-blog-examples.git|master|.sensei`
+
+An SSH key needs to be configured for private repositories.
+
+- https://github.com/settings/keys
+
+And the key should not have a passphrase.
+
+### Github over HTTPS
+
+It is also possible to access public repositories over HTTPS, and the same `repo.git|branch|folder` syntax is used e.g.
+
+`https://github.com/SecureCodeWarrior/sensei-blog-examples.git|master|.sensei`
+
+### Zipped over HTTP(s)
+
+Sensei can also access cookbooks which are zipped, over HTTP or HTTPS.
+
+e.g.
+
+`http://localhost:8000/rules.sensei.zip`
+
+The zip cookbook file should contain the contents of a cookbook folder e.g the `rules.sensei` file.
+
+## Sharing Summary
+
+Sensei supports using multiple cookbooks so that an individual programmer can have recipes that support their own learning and productivity.
+
+More importantly, we know that teams work most effectively when knowledge is shared. Having shared team repositories, e.g. for a specific project, or a specific library, or for a shared set of migration patterns, can help boost team productivity and codify the team’s experience.
+
+When a cookbook is shared, multiple teams can use the same cookbook which can also improve inter-team collaboration from different disciplines e.g. AppSec to development.
+
+With four core sharing mechanisms available, Sensei hopefully has at least one approach you can use to increase collaboration on knowledge sharing.
