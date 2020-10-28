@@ -1,13 +1,13 @@
 # Adding a Private Constructor
 
-In a utility class the fields and methods are static. There is no reason why I would ever instantiate it.
+In a utility class, when the fields and methods are static, there is no obvious reason why I would ever instantiate it.
 
-e.g. `privateconstructors.UtilityClass utility = new privateconstructors.UtilityClass()`
+e.g. `UtilityClass utility = new UtilityClass()`
 
 The code below is a simple implementation of a Utility class.
 
 ~~~~~~~~
-public class privateconstructors.UtilityClass {
+public class UtilityClass {
 
     public static final Boolean ULTIMATE_TRUTH = true;
 
@@ -17,13 +17,21 @@ public class privateconstructors.UtilityClass {
 }
 ~~~~~~~~
 
-I could use Sensei to add a private constructor to make it impossible for me to instantiate.
+This is the type of coding pattern that Static Analysis tools can pick up, but they often don't supply the ability to fix the issue.
+
+I can use Sensei to identify the coding pattern, add automatically generate a private constructor to make it impossible for me to instantiate the class.
+
+Now that I know I can fix the problem. I’ll refine the search conditions to show the recipe when it is most appropriate.
 
 ## Searching for the Class
 
-Initially I will create a recipe that matches on any class, because I'm really wanting to amend the code.
+I create a new recipe on the Utility class called `Static Classes: create private constructor`.
 
-I create a new recipe on the Utility class called `create private constructor`.
+```
+Name: Static Classes: create private constructor
+Description: create a private constructor for static classes
+Level: Error
+```
 
 And initially I'll search for a class.
 
@@ -41,7 +49,7 @@ For the Quick Fix, I will want to generate a private constructor.
 In the example class this would look like:
 
 ~~~~~~~~
-    private privateconstructors.UtilityClass(){}
+    private UtilityClass(){}
 ~~~~~~~~
 
 To add the above code to my class, my Quick Fix will add a Method, and the name of the method will be a Mustache template that uses the name of the class.
@@ -54,13 +62,15 @@ availableFixes:
       method: "private {{{ name }}}(){}"
 ~~~~~~~~
 
-In the GUI Editor, I use the `Show Variables` to create the Mustache template, and then edit the field to add the `private` modifier, brackets and braces to make it syntactically correct.
+In the GUI Editor, I use the `Show Variables` to create the Mustache template and then edit the field to add the `private` modifier, brackets, and braces to make it syntactically correct.
 
 And this would now allow me to add a private constructor to any class.
 
+The QuickFix preview helps me because I can see the generated code as I write the Mustache template.
+
 ## Search for Missing Constructors
 
-Ideally I don't want to create a recipe that flags an error against every class. So I'll add some additional conditions in the search so that we only match on classes that do not have a constructor.
+Ideally, I don't want to create a recipe that flags an error against every class. So I'll add some additional conditions in the search so that we only match on classes that do not have a constructor.
 
 ~~~~~~~~
 search:
@@ -73,7 +83,7 @@ search:
 
 The YAML is slightly different from the GUI.
 
-In the GUI I configure it to look kfor a class without a child method which is a constructor 'yes'. We use 'yes' in the GUI instead of 'true' to make the GUI a little more human friendly.
+In the GUI I configure it to look for a class without a child method which is a constructor 'yes'. We use 'yes' in the GUI instead of 'true' to make the GUI a little more human friendly.
 
 This recipe will now only reveal itself for any class without a constructor.
 
@@ -81,7 +91,7 @@ This recipe will now only reveal itself for any class without a constructor.
 
 So I might want to go further and look for the presence of static methods or fields.
 
-I look for any class without a constructor and which has either all public static fields, or all public static methods.
+I look for any class without a constructor and which has either all public static fields or all public static methods.
 
 ~~~~~~~~
 search:
@@ -104,9 +114,9 @@ search:
           constructor: true
 ~~~~~~~~
 
-Since Sensei is used to help the programmer in the IDE, rather than statically analyse the code and report all errors, this filter is good enough to rule out most classes in my code base where I might have a good reason to have a default public constructor.
+Since Sensei is used to help me, as a  programmer, in the IDE, rather than to statically analyze the code and report all errors, this filter is good enough to rule out most classes in my code base where I might have a good reason to have a default public constructor.
 
-And, in some projects this would be a step too far because the utility classes might have private methods, so I might choose to look for 'any' `public static` methods.
+In some projects, this might be a step too far because the utility classes could have private methods, so I might choose to look for the presence of 'any' `public static` methods, rather than 'all'.
 
 ~~~~~~~~
         - child:
@@ -118,12 +128,12 @@ And, in some projects this would be a step too far because the utility classes m
 
 ## Hints
 
-What I'm trying to do is create a simple enough recipe that includes all the situations I need it, but filter it so that it doesn't get suggested on every class.
+Sensei is not designed to replace a Static Analysis tool. Sensei can augment a Static Analysis tool for common issues associated with your coding process, or technology. By replicating enough of the matching to highlight an issue, and supporting the development process by generating the QuickFix code.
 
-And when working on recipes I try to de-risk them.
+What I'm trying to do is create a simple enough recipe that includes all the situations I need it, but filter it so that it doesn't get suggested in every class.
 
-In this case I wasn't sure if I could create the private constructor so I created this first. Then refactored the search conditions to make them more specific.
+When working on recipes I try to de-risk them, in this case, I wasn't sure if I could create the private constructor so I created the QuickFix first. Then refactored the search conditions to make them more specific.
 
 Sometimes when working on recipes I'm not sure how to perform the search, so I work on that first.
 
-I find recipes easier to create when I build them incrementally.
+I find recipes easier to create when I build them incrementally, switching between refactoring of the QuickFix and the search.
