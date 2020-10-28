@@ -2,12 +2,12 @@
 
 In a utility class the fields and methods are static. There is no reason why I would ever instantiate it.
 
-e.g. `UtilityClass utility = new UtilityClass()`
+e.g. `privateconstructors.UtilityClass utility = new privateconstructors.UtilityClass()`
 
 The code below is a simple implementation of a Utility class.
 
 ~~~~~~~~
-public class UtilityClass {
+public class privateconstructors.UtilityClass {
 
     public static final Boolean ULTIMATE_TRUTH = true;
 
@@ -41,7 +41,7 @@ For the Quick Fix, I will want to generate a private constructor.
 In the example class this would look like:
 
 ~~~~~~~~
-    private UtilityClass(){}
+    private privateconstructors.UtilityClass(){}
 ~~~~~~~~
 
 To add the above code to my class, my Quick Fix will add a Method, and the name of the method will be a Mustache template that uses the name of the class.
