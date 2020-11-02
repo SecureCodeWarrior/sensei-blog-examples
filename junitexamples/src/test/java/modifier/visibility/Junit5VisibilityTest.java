@@ -9,4 +9,9 @@ public class Junit5VisibilityTest {
     public void thisDoesNotNeedToBePublic(){
         Assertions.assertTrue(true);
     }
+
+    @Test
+    public void thisDoesNotNeedToBePublicEither(){
+        Assertions.assertTrue(true);
+    }
 }

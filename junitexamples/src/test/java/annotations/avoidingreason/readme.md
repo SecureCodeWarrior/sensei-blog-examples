@@ -104,7 +104,7 @@ The second argument is the String to apply the `sed` statement to, which in this
 The `sed` implementation requires that when the arguments themselves contain commas, that they are wrapped with `{{#encodeString}}` and `{{/encodeString}}`
     - e.g. `{{#encodeString}}{{{.}}}{{/encodeString}}`
 
-# Reverse Recipe
+## Reverse Recipe
 
 Since this is an example, and we might want to use this in demos, I wanted to explore how to reverse out the above change using a Sensei recipe.
 

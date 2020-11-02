@@ -150,7 +150,7 @@
         "yamlCode": "search:\n  method:\n    annotation:\n      type: \"org.junit.jupiter.api.Test\"\n    modifier: \"public\"",
         "mver": 6,
         "yamlQuickFixCode": "availableFixes:\n  - name: \"Remove @Test method public visibility\"\n    actions:\n      - changeModifiers:\n          visibility: \"\"\n",
-        "ruleName": "JUnit 5 test methods do not need to be public",
+        "ruleName": "JUnit: JUnit 5 test methods do not need to be public",
         "ruleID": "510f6589-d609-49a4-b6a9-c9fefcaeea14",
         "disableRuleIDs": [],
         "ruleShortDescription": "JUnit 5 test methods do not need public visibility",
@@ -184,6 +184,36 @@
         "ruleID": "4b70352d-5a1f-4e76-858b-33843b510de8",
         "disableRuleIDs": [],
         "ruleShortDescription": "execute query with untrusted inputs is vulnerable to SQL Injection",
+        "ruleErrorLevel": 2,
+        "ruleEnabled": true,
+        "ruleScope": []
+      }
+    },
+    {
+      "type": "947034909c9b08d0b583170e594b0eb327933231",
+      "model": {
+        "yamlCode": "search:\n  class:\n    allOf:\n    - modifier: \"public\"\n    without:\n      modifier: \"final\"\n",
+        "mver": 6,
+        "yamlQuickFixCode": "availableFixes:\n- name: \"Remove public modifier\"\n  actions:\n  - changeModifiers:\n      final: true\n",
+        "ruleName": "Immutability: use final classes to prevent extension",
+        "ruleID": "f9f53bb4-d447-4c45-a748-6e1b5d64f3a6",
+        "disableRuleIDs": [],
+        "ruleShortDescription": "Make the classes final to prevent people extending as mutable",
+        "ruleErrorLevel": 1,
+        "ruleEnabled": true,
+        "ruleScope": []
+      }
+    },
+    {
+      "type": "947034909c9b08d0b583170e594b0eb327933231",
+      "model": {
+        "yamlCode": "search:\n  class:\n    modifier: \"public\"\n    anyOf:\n    - child:\n        method:\n          annotation:\n            type: \"Test\"\n",
+        "mver": 6,
+        "yamlQuickFixCode": "availableFixes:\n- name: \"Remove public visibility from JUnit 5 Test class\"\n  actions:\n  - changeModifiers:\n      visibility: \"\"\n",
+        "ruleName": "JUnit: Junit 5 Test classes do not need to be public",
+        "ruleID": "cb7e426e-37af-4988-9329-eb045fda1a4e",
+        "disableRuleIDs": [],
+        "ruleShortDescription": "Junit 5 Test classes do not need to be public",
         "ruleErrorLevel": 2,
         "ruleEnabled": true,
         "ruleScope": []

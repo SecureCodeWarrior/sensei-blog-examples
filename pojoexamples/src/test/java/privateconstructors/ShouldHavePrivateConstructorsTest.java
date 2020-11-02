@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 public class ShouldHavePrivateConstructorsTest {
 
     @Test
-    void utilityClassShouldHavePrivateConstructor(){
+    public void utilityClassShouldHavePrivateConstructor(){
 
         Assertions.assertTrue(UtilityClass.getTrue());
 
