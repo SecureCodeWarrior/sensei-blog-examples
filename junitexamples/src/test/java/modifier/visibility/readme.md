@@ -1,6 +1,6 @@
 # Amending Method and Class Visibility for JUnit 5
 
-One of the joys of programming is the constant learning required to keep up to date. One of the issues is that we build up familiarity and patterns of usage that can impact the adoption of new approaches. Sensei can help migration by identifying deprecated patterns, and prompting us with the fix to use going forward.
+One of the joys of programming is the constant learning required to keep up to date. One of the issues is that we build up familiarity and patterns of usage that can impact the adoption of new approaches. Sensei can help migration by identifying deprecated patterns and prompting us with the fix to use going forward.
 
 As an example, when I migrated from JUnit 4 to JUnit 5, I was used to writing all my test classes and methods as `public`. But with JUnit 5 they can be `package private`.
 
@@ -98,7 +98,7 @@ availableFixes:
 
 Sensei has the ability to apply the QuickFix to all the violations in the current file.
 
-When I use `alt+enter` to apply the quick fix.
+When I use `alt+enter` to apply the QuickFix.
 
 If I expand the QuickFix name menu, I can see an option to:
 
@@ -110,7 +110,7 @@ When I select that option then Sensei will amend all the occurrences of the prob
 
 In the same way that a method does not need to be public, neither does the class.
 
-I can create a recipe and quick fix to amend the class.
+I can create a recipe and a QuickFix to amend the class.
 
 ```
 Name - JUnit: Junit 5 Test classes do not need to be public
@@ -131,7 +131,7 @@ search:
             type: "Test"
 ```       
 
-And I can make the change to the class definition with the `changeModifiers` action again.
+I can make the change to the class definition with the `changeModifiers` action again.
 
 ```
 availableFixes:
@@ -143,10 +143,10 @@ availableFixes:
 
 ## Summary
 
-A static analysis tool initially alerted me to this recommended approach in JUnit. But the static analysis tool didn't help me build the muscle memory to change my code as I Write it.
+A static analysis tool initially alerted me to this recommended approach in JUnit. But the static analysis tool didn't help me build the muscle memory to change my code as I program.
 
 Use the 'Level' to alert you. When it is a problem I am trying to stamp out in my coding I initially make it 'Error' and then reduce this as I wean myself off the coding approach.
 
-Rmember you can use Sensei to fix all the issues in the current file at the same time, by using the drop down menu option when applying the QuickFix.
+Remember you can use Sensei to fix all the issues in the current file at the same time, by using the drop-down menu option when applying the QuickFix.
 
-By creating a Sensei recipe, I can see my old coding approach in real time. And QuickFix it, to reinforce the approach if I occasionally slip up in my coding.
+By creating a Sensei recipe, I can see my old coding approach in real-time. And QuickFix it, to reinforce the approach if I occasionally slip up in my coding.

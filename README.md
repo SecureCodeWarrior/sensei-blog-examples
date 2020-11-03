@@ -4,8 +4,14 @@ Example code to be used in Sensei blog posts.
 
 TLDR; [Sensei](https://plugins.jetbrains.com/plugin/14015-sensei-by-secure-code-warrior-) is a free IntelliJ plugin from [Secure Code Warrior](https://securecodewarrior.com/) that helps you codify quality coding practices as real-time warnings in your IDE, and create Quick Fix solutions to educate you or rewrite your code.
 
-- [Download the plugin from the IntelliJ Marketplace](https://plugins.jetbrains.com/plugin/14015-sensei-by-secure-code-warrior-)
+- [Instructions to install the plugin from the IntelliJ Marketplace](https://plugins.jetbrains.com/plugin/14015-sensei-by-secure-code-warrior-/getstarted)
 - [Official Documentation](https://sensei-docs-beta.securecodewarrior.com/)
+- [Blog](https://insights.securecodewarrior.com/)
+- [YouTube](https://www.youtube.com/channel/UCGXOkj26t4wItqf_BAt3W0Q)
+
+If you want to see Sensei in Action then we have a short video:
+
+[![](https://i.ytimg.com/vi/mjXGliXJ7M8/hqdefault.jpg)](https://www.youtube.com/watch?v=mjXGliXJ7M8)
 
 
 ## About This Project
@@ -23,7 +29,7 @@ This is a mixed media project, it contains `readme.md` files within the code str
 ### POJO
 
 - [Converting System.out.println to using a Logger](pojoexamples/src/test/java/logging)
-- [Adding a Private Constructor to a Utility Class](pojoexamples/src/test/java/privateconstructors)
+- [Adding a Private Constructor to a Utility Class](pojoexamples/src/main/java/privateconstructors)
 
 ### JUnit 5
 
@@ -35,6 +41,14 @@ This is a mixed media project, it contains `readme.md` files within the code str
 ### Guice
 
 - [Detecting Forgotten Guice Dependency Injection Wiring](guiceexamples/src/test/java/reporters)
+
+### SQL Injection Fixes
+
+- [Fix SQL Injection Vulnerability](sqlexamples/src/test/java/sqlinjection)
+
+### Experiments
+
+- [Basic Immutability](pojoexamples/src/main/java/immutability)
 
 ---
 

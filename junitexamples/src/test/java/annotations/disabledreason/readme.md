@@ -7,6 +7,10 @@ In this example, we will:
 
 Sensei provides the ability to match problematic code patterns and then amend them to agreed implementations. In this example I am using `@Disabled` without a parameter as the problematic code pattern.
 
+## See This In Action on YouTube
+
+[![](https://i.ytimg.com/vi/mjXGliXJ7M8/hqdefault.jpg)](https://www.youtube.com/watch?v=mjXGliXJ7M8)
+
 ## Disabled Test Annotation
 
 Disabled tests without a specified reason can prove problematic over the long term
