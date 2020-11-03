@@ -2,16 +2,20 @@ package immutability;
 
 public class MutableCoordinates {
 
-    private final int x;
-    private final int y;
+    private int x;
+    private int y;
 
-    private MutableCoordinates(int x, int y){
-        this.x=x;
-        this.y=y;
+    public MutableCoordinates(){
+        x=0;
+        y=0;
     }
 
-    public static MutableCoordinates create(int x, int y){
-        return new MutableCoordinates(x,y);
+    public void setX(int x){
+        this.x = x;
+    }
+
+    public void setY(int y){
+        this.y = y;
     }
 
     public int getX(){
@@ -22,7 +26,26 @@ public class MutableCoordinates {
         return y;
     }
 
-    public MutableCoordinates transformPositionBy(int xadjust, int yadjust){
-        return new MutableCoordinates(this.x+xadjust, this.y+yadjust);
+    public void transformPositionBy(int xadjust, int yadjust){
+        this.x+=xadjust;
+        this.y+=yadjust;
     }
+
+
+/*
+To make immutable:
+
+- fields (member variables) should be final and set in the constructor
+- remove the setMethods and use the constructor
+- avoiding a default constructor and using constructor that sets the full object
+- class should be final to prevent extension
+- void methods should be converted into methods that return a new immutable object created with the 'side-effect' as the instantiated state
+- method parameters should be final
+
+Possibly:
+
+- create types for X and Y coordinates to prevent mixup of params
+
+*/
+
 }
