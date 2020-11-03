@@ -1,16 +1,16 @@
 package immutability;
 
-public class ImmutableCoordinates {
+public final class ImmutableCoordinates {
 
     private final int x;
     private final int y;
 
-    private ImmutableCoordinates(int x, int y){
+    private ImmutableCoordinates(final int x, final int y){
         this.x=x;
         this.y=y;
     }
 
-    public static ImmutableCoordinates create(int x, int y){
+    public static ImmutableCoordinates create(final int x, final int y){
         return new ImmutableCoordinates(x,y);
     }
 
@@ -22,7 +22,7 @@ public class ImmutableCoordinates {
         return y;
     }
 
-    public ImmutableCoordinates transformPositionBy(int xadjust, int yadjust){
+    public ImmutableCoordinates transformPositionBy(final int xadjust, final int yadjust){
         return new ImmutableCoordinates(this.x+xadjust, this.y+yadjust);
     }
 }

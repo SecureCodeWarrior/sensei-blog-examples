@@ -11,7 +11,7 @@ public class ImmutableCoordinatesTest {
         ImmutableCoordinates startPosition = ImmutableCoordinates.create(3,6);
         ImmutableCoordinates endPosition = startPosition.transformPositionBy(-10, 5);
 
-        Assertions.assertEquals(-13, endPosition.getX());
+        Assertions.assertEquals(-7, endPosition.getX());
         Assertions.assertEquals(11, endPosition.getY());
     }
 
