@@ -140,7 +140,7 @@
         "disableRuleIDs": [],
         "ruleShortDescription": "Test Classes in JUnit 5 do not need to be public",
         "ruleErrorLevel": 1,
-        "ruleEnabled": true,
+        "ruleEnabled": false,
         "ruleScope": []
       }
     },
@@ -155,7 +155,7 @@
         "disableRuleIDs": [],
         "ruleShortDescription": "JUnit 5 test methods do not need public visibility",
         "ruleErrorLevel": 2,
-        "ruleEnabled": true,
+        "ruleEnabled": false,
         "ruleScope": []
       }
     },
@@ -215,6 +215,36 @@
         "disableRuleIDs": [],
         "ruleShortDescription": "Junit 5 Test classes do not need to be public",
         "ruleErrorLevel": 2,
+        "ruleEnabled": false,
+        "ruleScope": []
+      }
+    },
+    {
+      "type": "947034909c9b08d0b583170e594b0eb327933231",
+      "model": {
+        "yamlCode": "search:\n  field:\n    without:\n      modifier: \"final\"\n",
+        "mver": 6,
+        "yamlQuickFixCode": "availableFixes:\n- name: \"make fields `final`\"\n  actions:\n  - rewrite:\n      to: \"{{{ modifierList }}} final {{{ typeElement }}} {{{ name }}};\"\n      target: \"self\"\n",
+        "ruleName": "Immutable: Fields should be final and set in the constructor",
+        "ruleID": "ee691ac1-5f83-4bdb-955e-2563775a3571",
+        "disableRuleIDs": [],
+        "ruleShortDescription": "Making fields final can highlight mutability issues",
+        "ruleErrorLevel": 1,
+        "ruleEnabled": true,
+        "ruleScope": []
+      }
+    },
+    {
+      "type": "947034909c9b08d0b583170e594b0eb327933231",
+      "model": {
+        "yamlCode": "search:\n  constructor:\n    without:\n      child:\n        argument: {}\n",
+        "mver": 6,
+        "yamlQuickFixCode": "availableFixes:\n- name: \"amend to private constructor that sets fields with a static factory create\\\n    \\ method\"\n  actions:\n  - rewrite:\n      to: \"private {{{ name }}}({{#sed}}{{#encodeString}}s/(.*),/$1/{{/encodeString}},{{#encodeString}}\\n\\\n        {{#containingClass.fields}}final {{typeElement}} {{name}}, {{/containingClass.fields}}{{/encodeString}}{{/sed}}){\\n\\\n        {{#containingClass.fields}}this.{{name}}\u003d{{name}};\\n        {{/containingClass.fields}}\\n\\\n        }\"\n      target: \"self\"\n  - addMethod:\n      method: \"public final static {{{ name }}} create({{#sed}}{{#encodeString}}s/(.*),/$1/{{/encodeString}},{{#encodeString}}\\n\\\n        {{#containingClass.fields}}final {{typeElement}} {{name}}, {{/containingClass.fields}}{{/encodeString}}{{/sed}}){\\n\\\n        return new {{{ name }}}({{#sed}}{{#encodeString}}s/(.*),/$1/{{/encodeString}},{{#encodeString}}{{#containingClass.fields}}{{name}},\\\n        \\ {{/containingClass.fields}}{{/encodeString}}{{/sed}});\\n}\"\n      position:\n        after:\n          constructor: {}\n      target: \"parentClass\"\n",
+        "ruleName": "Immutable: default constructor should set field values from parameters",
+        "ruleID": "aa8ad912-52ab-44c9-8e3d-b2842333f3ca",
+        "disableRuleIDs": [],
+        "ruleShortDescription": "avoid default constructor and create a private constructor that sets the field values",
+        "ruleErrorLevel": 1,
         "ruleEnabled": true,
         "ruleScope": []
       }
