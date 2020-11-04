@@ -194,7 +194,7 @@
       "model": {
         "yamlCode": "search:\n  class:\n    allOf:\n    - modifier: \"public\"\n    without:\n      modifier: \"final\"\n",
         "mver": 6,
-        "yamlQuickFixCode": "availableFixes:\n- name: \"Remove public modifier\"\n  actions:\n  - changeModifiers:\n      final: true\n",
+        "yamlQuickFixCode": "availableFixes:\n- name: \"Remove public modifier and make final\"\n  actions:\n  - changeModifiers:\n      final: true\n",
         "ruleName": "Immutability: use final classes to prevent extension",
         "ruleID": "f9f53bb4-d447-4c45-a748-6e1b5d64f3a6",
         "disableRuleIDs": [],

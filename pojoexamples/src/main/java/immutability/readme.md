@@ -42,10 +42,22 @@ QuickFix:
 
 ```
 availableFixes:
-- name: "Remove public modifier"
+- name: "Remove public modifier and make final"
   actions:
   - changeModifiers:
       final: true
+```
+
+### Before
+
+```
+public class MutableCoordinates {
+```
+
+### Final
+
+```
+public final class MutableCoordinates {
 ```
 
 ## Make constructors private
@@ -92,6 +104,40 @@ availableFixes:
 
 It might be appropriate to create smaller rules to handle more intermediate step transformations, rather than trying to do a lot in an single recipe.
 
+### Before
+
+```
+    public class MutableCoordinates {
+    
+        private int x;
+        private int y;
+    
+        public MutableCoordinates(){
+            x=0;
+            y=0;
+        }
+    ...
+```
+
+### After
+
+```
+public class MutableCoordinates {
+
+    private int x;
+    private int y;
+
+    private MutableCoordinates(final int x, final int y ){
+        this.x=x;
+        this.y=y;
+    }
+
+    public final static MutableCoordinates create(final int x, final int y ){
+        return new MutableCoordinates(x, y );
+    }
+   ...
+```
+
 ## Make fields `final`
 
 ```
@@ -114,4 +160,18 @@ availableFixes:
   - rewrite:
       to: "{{{ modifierList }}} final {{{ typeElement }}} {{{ name }}};"
       target: "self"
+```
+
+Before:
+
+```
+    private int x;
+    private int y;
+```
+
+After:
+
+```
+    private final int x;
+    private final int y;
 ```

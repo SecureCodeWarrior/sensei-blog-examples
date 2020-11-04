@@ -16,3 +16,8 @@ buildNumber.properties
 /guiceexamples/guiceexamples.iml
 guiceexamples/guiceexamples.iml
 *.iml
+.sensei/.DS_Store
+.DS_Store
+guiceexamples/src/test/java/.DS_Store
+junitexamples/src/test/java/annotations/.DS_Store
+pojoexamples/src/test/java/.DS_Store
