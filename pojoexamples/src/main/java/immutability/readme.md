@@ -104,6 +104,10 @@ availableFixes:
 
 It might be appropriate to create smaller rules to handle more intermediate step transformations, rather than trying to do a lot in an single recipe.
 
+The above recipe looks pretty complicated because of all the embedded `sed` functionality. That is simply to remove trailing `, `.
+
+Also I used the Mustache `foreach` construct to iterate over all the fields. When writing a `foreach` in the template it is important to use `{{` rather than `{{{` and to have no spaces when matching on the `#` i.e. `{{#containingClass.fields}}` not `{{{ #containingClass.fields }}}`- why might the 2nd representation crop up? Because when we add variables from the `Show Variables` list, in order to have the text unescaped (i.e. normal) we add it to the template as `{{{`.
+
 ### Before
 
 ```
