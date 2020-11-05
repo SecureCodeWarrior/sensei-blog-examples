@@ -22,7 +22,7 @@ Making it `final` might help.
 
 ```
 Name: Immutability: use final classes to prevent extension
-Description: Make the classes final to prevent people extending as mutable
+Description: Make the classes final to prevent extension with a mutable subclass
 Level: Warning
 ```
 
@@ -42,7 +42,7 @@ QuickFix:
 
 ```
 availableFixes:
-- name: "Remove public modifier and make final"
+- name: "Add final modifier"
   actions:
   - changeModifiers:
       final: true
