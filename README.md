@@ -4,7 +4,7 @@ TLDR; [Sensei](https://plugins.jetbrains.com/plugin/14015-sensei-by-secure-code-
 
 **How to Use:**
 
-- [Install Sensei Plugin]((https://plugins.jetbrains.com/plugin/14015-sensei-by-secure-code-warrior-/getstarted))
+- [Install Sensei Plugin](https://plugins.jetbrains.com/plugin/14015-sensei-by-secure-code-warrior-/getstarted)
 - clone or download project
 - open in IDE
 - Example Sensei recipes in `.sensei` will be loaded
