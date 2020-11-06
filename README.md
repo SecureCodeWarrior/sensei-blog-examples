@@ -1,30 +1,35 @@
-# Sensei Blog Examples
+# About This Project
 
-Example code to be used in Sensei blog posts.
+TLDR; [Sensei](https://plugins.jetbrains.com/plugin/14015-sensei-by-secure-code-warrior-) is a free IntelliJ plugin from [Secure Code Warrior](https://securecodewarrior.com/) that helps you codify quality coding practices as real-time warnings in your IDE, and create Quick Fix solutions to educate you or rewrite your code. This project has example recipes and code to experiment with.
 
-TLDR; [Sensei](https://plugins.jetbrains.com/plugin/14015-sensei-by-secure-code-warrior-) is a free IntelliJ plugin from [Secure Code Warrior](https://securecodewarrior.com/) that helps you codify quality coding practices as real-time warnings in your IDE, and create Quick Fix solutions to educate you or rewrite your code.
+**How to Use:**
+
+- [Install Sensei Plugin]((https://plugins.jetbrains.com/plugin/14015-sensei-by-secure-code-warrior-/getstarted))
+- clone or download project
+- open in IDE
+- Example Sensei recipes in `.sensei` will be loaded
+- read through Use Cases to see how recipes identify issues and fix code
+
+_This is a Multi module maven project, when you clone this project, or download it as a zip, remember to open the top level `pom.xml` as the project. The `.sensei` folder contains example recipes which support the examples and embedded `readme.md` files._ 
+
+## Docs and Links
 
 - [Instructions to install the plugin from the IntelliJ Marketplace](https://plugins.jetbrains.com/plugin/14015-sensei-by-secure-code-warrior-/getstarted)
 - [Official Documentation](https://sensei-docs-beta.securecodewarrior.com/)
 - [Blog](https://insights.securecodewarrior.com/)
 - [YouTube](https://www.youtube.com/channel/UCGXOkj26t4wItqf_BAt3W0Q)
 
+## Example Video
+
 If you want to see Sensei in Action then we have a short video:
 
 [![](https://i.ytimg.com/vi/mjXGliXJ7M8/hqdefault.jpg)](https://www.youtube.com/watch?v=mjXGliXJ7M8)
 
-
-## About This Project
-
-This is a Multi module maven project where modules are for different technologies and examples.
-
-If you clone this project, or download it as a zip, remember to open the top level `pom.xml` as the project.
-
-The `.sensei` folder contains example recipes which support the examples and embedded `readme.md` files. 
+## Example Use Cases for Sensei
 
 This is a mixed media project, it contains `readme.md` files within the code structure. This helps make the project easier to review and understand when viewed on Github, and when using the markdown preview pane inside IntelliJ itself.
 
-## Example Use Cases for Sensei
+The following links are `readme.md` use case descriptions in the code base.
 
 ### POJO
 
