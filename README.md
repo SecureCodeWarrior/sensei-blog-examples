@@ -146,7 +146,7 @@ Since Sensei is designed to work alongside whatever static analysis tool you're 
 
 ---
 
-# Sensei Team Support
+## Sensei Team Support
 
 When one person creates a recipe to improve their code quality or productivity, everyone on the team can benefit when the cookbooks are shared.
 
