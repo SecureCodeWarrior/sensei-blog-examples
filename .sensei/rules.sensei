@@ -195,7 +195,7 @@
         "yamlCode": "search:\n  class:\n    allOf:\n    - modifier: \"public\"\n    without:\n      modifier: \"final\"\n",
         "mver": 6,
         "yamlQuickFixCode": "availableFixes:\n- name: \"Remove public modifier and make final\"\n  actions:\n  - changeModifiers:\n      final: true\n",
-        "ruleName": "Immutability: use final classes to prevent extension",
+        "ruleName": "Immutable: use final classes to prevent extension",
         "ruleID": "f9f53bb4-d447-4c45-a748-6e1b5d64f3a6",
         "disableRuleIDs": [],
         "ruleShortDescription": "Make the classes final to prevent people extending as mutable",
@@ -245,6 +245,36 @@
         "disableRuleIDs": [],
         "ruleShortDescription": "avoid default constructor and create a private constructor that sets the field values",
         "ruleErrorLevel": 1,
+        "ruleEnabled": true,
+        "ruleScope": []
+      }
+    },
+    {
+      "type": "947034909c9b08d0b583170e594b0eb327933231",
+      "model": {
+        "yamlCode": "search:\n  method:\n    with:\n      modifier: \"public\"\n      returnType: \"void\"\n    name:\n      matches: \"set.*\"\n",
+        "mver": 6,
+        "yamlQuickFixCode": "availableFixes:\n- name: \"Delete The public void method\"\n  actions:\n  - rewrite:\n      to: \"\"\n      target: \"self\"\n",
+        "ruleName": "Immutable: delete public void setters",
+        "ruleID": "db13e8ee-dadc-4e71-9dbf-8fb5e1d3ce32",
+        "disableRuleIDs": [],
+        "ruleShortDescription": "void setters can be replaced with use of constructor or static factory methods",
+        "ruleErrorLevel": 1,
+        "ruleEnabled": true,
+        "ruleScope": []
+      }
+    },
+    {
+      "type": "947034909c9b08d0b583170e594b0eb327933231",
+      "model": {
+        "yamlCode": "search:\n  method:\n    with:\n      modifier: \"public\"\n      returnType:\n        not: \"void\"\n    name:\n      matches: \"set.*\"\n",
+        "mver": 6,
+        "yamlQuickFixCode": "availableFixes:\n- name: \"Fix the code by manual refactoring\"\n  actions: []\n",
+        "ruleName": "Immutable: avoid setters that return values",
+        "ruleID": "b03a3f9d-977c-4562-8abb-fa108d85e3cf",
+        "disableRuleIDs": [],
+        "ruleShortDescription": "avoid setters methods that return values",
+        "ruleErrorLevel": 2,
         "ruleEnabled": true,
         "ruleScope": []
       }
