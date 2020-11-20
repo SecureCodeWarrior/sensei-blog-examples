@@ -2,7 +2,7 @@
 
 In a utility class, when the fields and methods are static, there is no obvious reason why I would ever instantiate it.
 
-e.g. `UtilityClass utility = new UtilityClass()`
+e.g. `UtilityClass utility = new UtilityClass();`
 
 The code below is a simple implementation of a Utility class.
 
@@ -19,7 +19,7 @@ public class UtilityClass {
 
 This is the type of coding pattern that Static Analysis tools can pick up, but they often don't supply the ability to fix the issue.
 
-I can use Sensei to identify the coding pattern, add automatically generate a private constructor to make it impossible for me to instantiate the class.
+I can use Sensei to identify the coding pattern, and automatically generate a private constructor to make it impossible for me to instantiate the class.
 
 Now that I know I can fix the problem. I’ll refine the search conditions to show the recipe when it is most appropriate.
 

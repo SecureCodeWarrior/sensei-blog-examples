@@ -35,6 +35,7 @@ The following links are `readme.md` use case descriptions in the code base.
 
 - [Converting System.out.println to using a Logger](pojoexamples/src/test/java/logging)
 - [Adding a Private Constructor to a Utility Class](pojoexamples/src/main/java/privateconstructors)
+- [Basic Immutability](pojoexamples/src/main/java/immutability)
 
 ### JUnit 5
 
@@ -51,9 +52,6 @@ The following links are `readme.md` use case descriptions in the code base.
 
 - [Fix SQL Injection Vulnerability](sqlexamples/src/test/java/sqlinjection)
 
-### Experiments
-
-- [Basic Immutability](pojoexamples/src/main/java/immutability)
 
 ---
 
