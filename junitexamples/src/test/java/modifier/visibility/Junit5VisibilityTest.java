@@ -6,12 +6,12 @@ import org.junit.jupiter.api.Test;
 public class Junit5VisibilityTest {
 
     @Test
-    public void thisDoesNotNeedToBePublic(){
+    void thisDoesNotNeedToBePublic(){
         Assertions.assertTrue(true);
     }
 
     @Test
-    public void thisDoesNotNeedToBePublicEither(){
+    void thisDoesNotNeedToBePublicEither(){
         Assertions.assertTrue(true);
     }
 }

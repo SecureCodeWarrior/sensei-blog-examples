@@ -45,7 +45,7 @@ The tasks I've taken on board for this readme are to:
 
 ## Recipe Settings
 
-The first step I take with Sensei is to "add new recipe" and search for the coding pattern I want the recipe to act on.
+The first step I take with Sensei is to "Create a new recipe" and search for the coding pattern I want the recipe to act on.
 
 ```
 Name: JUnit: Make @Disabled @Test from SKIPTHIS

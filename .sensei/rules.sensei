@@ -155,7 +155,7 @@
         "disableRuleIDs": [],
         "ruleShortDescription": "JUnit 5 test methods do not need public visibility",
         "ruleErrorLevel": 2,
-        "ruleEnabled": false,
+        "ruleEnabled": true,
         "ruleScope": []
       }
     },
@@ -215,7 +215,7 @@
         "disableRuleIDs": [],
         "ruleShortDescription": "Junit 5 Test classes do not need to be public",
         "ruleErrorLevel": 2,
-        "ruleEnabled": false,
+        "ruleEnabled": true,
         "ruleScope": []
       }
     },
