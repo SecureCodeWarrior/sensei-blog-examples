@@ -1,14 +1,13 @@
 # How to catch and fix a dependency injection issue using Sensei
 
-- Author Credits: Charlie Eriksen, Alan Richardson
+- Author Credits: Charlie Eriksen, Alan Richardson, Robin Claerhout
 
-Scenario: We are learning Guice, and we keep making the simple mistake of
-forgetting to wire things up.
+The Sensei project itself has its own set of recipes which have built up over time, this is an example of one of the scenarios the Sensei team built a Recipe to cover. A misconfiguration of Guice, which led to a `NullPointerException` being reported at runtime during our testing.
 
-We could...
+This could be generalised to many Dependency Injection scenarios where code is syntactically correct, but because the wiring configuration was incorrect, an error slips through.
 
-- write unit tests, and catch the null pointer exceptions there
-    - but some of our code is using a GUI and its legacy code and ... more excuses
+This often happens when we are learning the technology, and we keep making the simple mistake of
+forgetting to wire things up. But this also happens to experienced professionals because, well... we all make mistakes, and we may not have Unit Tests to cover everything.
 
 
 ## RunTime Exceptions from Incorrect Dependency Injection Wiring
@@ -39,7 +38,7 @@ public class SystemOutModule extends AbstractModule {
 
 When we try to use the `reporter`, created using the `Injector`, it is not fully instantiated and we receive a `NullPointerException` when we call `reportThisMany`.
 
-We may well have missed that in our code review, or we didn't have unit tests which triggered the dependency injection, and it slipped out into production
+We may well have missed that in our code review, or we didn't have unit tests which triggered the dependency injection, and it slipped out into our build.
 
 ## Warning Signs
 
@@ -60,7 +59,7 @@ binder().requestStaticInjection(CountReporter.class);
 
 Had we written the `requestStaticInjection` code then the Syntax Error generated when trying to use the `CountReporter` would have alerted us to the simple error.
 
-But... we forgot, and there were no syntactical warning signs in the code.
+Sadly. We forgot, and there were no syntactic warning signs in the code.
 
 ## How could Sensei help?
 
@@ -68,9 +67,14 @@ We probably wouldn't use Sensei to pick up the missing `requestStaticInjection` 
 our Guice configuration wiring would need to use that method, and we can't guarantee that
 all wiring is going to be as simple as this use-case.
 
-But we could write a Sensei rule to pick up some warning signs that our code is not up to scratch.
+We could write a Sensei rule to look for some warning signs that our code is not up to scratch.
 
-In this case, create a Sensei recipe to find any classes with `@Inject` annotated fields, where the classes are not public. Because then they are unlikely to have been wired up.
+In this case that would mean:
+
+- Find any classes with `@Inject` annotated fields
+- Where the classes are not public.
+  
+The above was the warning sign that they were unlikely to have been wired up.
 
 By creating a recipe, then we will have a warning sign early, during the coding, and reduce the reliance on our pull requests or resolving our tech debt to allow us to add Unit Tests.
 
@@ -80,14 +84,14 @@ The task I want to complete is:
 
 - Create a recipe which matches fields annotated with `@Inject` which are in `protected private` classes
 
-That should hopefully give us enough warning to find Modules using it and add the missing wiring code.
+That should hopefully give us enough warning to identify any Modules using it and add the missing wiring code.
 
 In my `CountReporter` class I will use `Alt+Enter` to `Create a new Recipe` and I will `start from scratch`
 
 I will name this and add a description:
 
 ~~~~~~~~
-Name: Guice Injected Field Not Public
+Name: Guice: Injected Field Not Public
 Description: If the Injected field is not public then the code might not be wired up
 Level: Warning
 ~~~~~~~~
@@ -104,6 +108,10 @@ search:
           modifier: "public"
 ~~~~~~~~
 
+## Fix
+
+The QuickFix in the recipe will amend the injected class, but that is not the only code I have to change.
+
 ~~~~~~~~
 availableFixes:
 - name: "Change class to public. Remember to also request injection on this class"
@@ -113,9 +121,7 @@ availableFixes:
       target: "parentClass"
 ~~~~~~~~
 
-## Fix
-
-When the recipe is triggered, then I still have a manual step to perform in my code, adding the line containing `requestStaticInjection` to fully instantiate the object.
+When the recipe is triggered I still have a manual step to perform in my code, adding the line containing `requestStaticInjection` to fully instantiate the object.
 
 ~~~~~~~~
 public class SystemOutModule extends AbstractModule {
@@ -129,6 +135,12 @@ public class SystemOutModule extends AbstractModule {
 }
 ~~~~~~~~
 
+I could potentially write another recipe to pick this up. I probably wouldn't do that unless forgetting to add the static injection became a semi-regular error that I made when coding.
+
 ## Summary
 
 If we ever find ourselves making a mistake with a common root pattern, then Sensei can help codify the knowledge around detecting and fixing the issue, and then hopefully, it won't slip through code reviews and into production.
+
+Sometimes the recipes we write identify heuristic patterns i.e. matching them doesn't guarantee that there is a problem, but is likely that there is a problem.
+
+Also, the recipes and QuickFixes that we write, don't have to be fully comprehensive, they need to be good enough that they help us identify and fix problems without being overcomplicated. Because when they become overcomplicated they become harder to understand and harder to maintain. 
