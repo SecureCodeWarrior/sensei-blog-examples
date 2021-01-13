@@ -293,6 +293,21 @@
         "ruleEnabled": true,
         "ruleScope": []
       }
+    },
+    {
+      "type": "947034909c9b08d0b583170e594b0eb327933231",
+      "model": {
+        "yamlCode": "search:\n  expression:\n    anyOf:\n      - in:\n          condition: {}\n    value:\n      caseSensitive: false\n      matches: \".* \u0026 .*\"",
+        "mver": 6,
+        "yamlQuickFixCode": "availableFixes:\n  - name: \"Replace bitwise AND operator to logical AND operator\"\n    actions:\n      - rewrite:\n          to: \"{{#sed}}s/\u0026/\u0026\u0026/g,{{{ . }}}{{/sed}}\"\n",
+        "ruleName": "Conditions: Bitwise Used Instead of Boolean",
+        "ruleID": "0eaf33a8-9173-4642-96be-ee5426861d6d",
+        "disableRuleIDs": [],
+        "ruleShortDescription": "Check if you meant to use a Bitwise \u0026 instead of a Boolean \u0026\u0026",
+        "ruleErrorLevel": 2,
+        "ruleEnabled": true,
+        "ruleScope": []
+      }
     }
   ],
   "generators": []

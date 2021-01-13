@@ -149,5 +149,5 @@ There are other situations where this could crop up e.g. the assignment example,
 
 In its current form, this recipe would identify many of the live use-cases, and _most importantly_, the one that was reported in my project.
 
-> _NOTE: A fair few code warriors contributed to this example and recipe review - Charlie Eriksen, Mattieu, Robin, Brysen, Nathan. Thanks for your help._
+> _NOTE: A fair few code warriors contributed to this example and recipe review - Charlie Eriksen, Matthieu Calie, Robin Claerhaut, Brysen Ackx, Nathan Desmet, Downey Robersscheuten. Thanks for your help._
 
