@@ -36,6 +36,7 @@ The following links are `readme.md` use case descriptions in the code base.
 - [Converting System.out.println to using a Logger](pojoexamples/src/test/java/logging)
 - [Adding a Private Constructor to a Utility Class](pojoexamples/src/main/java/privateconstructors)
 - [Basic Immutability](pojoexamples/src/main/java/immutability)
+- [Java Gotchas - Bitwise vs Boolean Operators](pojoexamples/src/test/java/gotchas/bitwiseoperator)
 
 ### JUnit 5
 
