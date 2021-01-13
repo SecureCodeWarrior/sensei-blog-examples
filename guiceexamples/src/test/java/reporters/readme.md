@@ -1,8 +1,8 @@
-# How to catch and fix a dependency injection issue using Sensei
+# How to catch and fix a Guice dependency injection issue using Sensei
 
 - Author Credits: Charlie Eriksen, Alan Richardson, Robin Claerhout
 
-The Sensei project itself has its own set of recipes which have built up over time, this is an example of one of the scenarios the Sensei team built a Recipe to cover. A misconfiguration of Guice, which led to a `NullPointerException` being reported at runtime during our testing.
+The Sensei project itself has its own set of recipes that have built up over time, this is an example of one of the scenarios the Sensei team built a recipe to cover. A misconfiguration of Guice, which led to a `NullPointerException` being reported at runtime during our testing.
 
 This could be generalised to many Dependency Injection scenarios where code is syntactically correct, but because the wiring configuration was incorrect, an error slips through.
 
@@ -38,11 +38,11 @@ public class SystemOutModule extends AbstractModule {
 
 When we try to use the `reporter`, created using the `Injector`, it is not fully instantiated and we receive a `NullPointerException` when we call `reportThisMany`.
 
-We may well have missed that in our code review, or we didn't have unit tests which triggered the dependency injection, and it slipped out into our build.
+We may well have missed that in our code review, or we didn't have unit tests that triggered the dependency injection, and it slipped out into our build.
 
 ## Warning Signs
 
-In this case there is a warning sign, the `CountReporter` has a static field annotated with `@Inject` but... the `CountReporter` class itself is `package private`. In a complicated code base this could be a warning sign that it isn't used because the Module class configuring the bindings needs to be in the same package for this to work.
+In this case, there is a warning sign, the `CountReporter` has a static field annotated with `@Inject` but... the `CountReporter` class itself is `package private`. In a complicated code base this could be a warning sign that it isn't used because the Module class configuring the bindings needs to be in the same package for this to work.
 
 ~~~~~~~~
 class CountReporter {
@@ -58,6 +58,11 @@ binder().requestStaticInjection(CountReporter.class);
 ~~~~~~~~
 
 Had we written the `requestStaticInjection` code then the Syntax Error generated when trying to use the `CountReporter` would have alerted us to the simple error.
+
+```
+> 'reporters.CountReporter' is not public in 'reporters'.
+  Cannot be accessed from outside package
+```
 
 Sadly. We forgot, and there were no syntactic warning signs in the code.
 
@@ -82,11 +87,11 @@ By creating a recipe, then we will have a warning sign early, during the coding,
 
 The task I want to complete is:
 
-- Create a recipe which matches fields annotated with `@Inject` which are in `protected private` classes
+- Create a recipe that matches fields annotated with `@Inject` which are in `protected private` classes
 
 That should hopefully give us enough warning to identify any Modules using it and add the missing wiring code.
 
-In my `CountReporter` class I will use `Alt+Enter` to `Create a new Recipe` and I will `start from scratch`
+In my `CountReporter` class, I will use `Alt+Enter` to `Create a new Recipe` and I will `start from scratch`
 
 I will name this and add a description:
 
@@ -95,6 +100,8 @@ Name: Guice: Injected Field Not Public
 Description: If the Injected field is not public then the code might not be wired up
 Level: Warning
 ~~~~~~~~
+
+The search I write looks for a field with the `Inject` annotation which has not been scoped as `public`.
 
 ~~~~~~~~
 search:

@@ -274,7 +274,7 @@
         "ruleID": "b03a3f9d-977c-4562-8abb-fa108d85e3cf",
         "disableRuleIDs": [],
         "ruleShortDescription": "avoid setters methods that return values",
-        "ruleErrorLevel": 2,
+        "ruleErrorLevel": 1,
         "ruleEnabled": true,
         "ruleScope": []
       }
@@ -289,7 +289,7 @@
         "ruleID": "395403ba-c7f2-4c03-bab5-a535260b3036",
         "disableRuleIDs": [],
         "ruleShortDescription": "void methods have side-effects, return a new oject or primitve instead",
-        "ruleErrorLevel": 2,
+        "ruleErrorLevel": 1,
         "ruleEnabled": true,
         "ruleScope": []
       }
