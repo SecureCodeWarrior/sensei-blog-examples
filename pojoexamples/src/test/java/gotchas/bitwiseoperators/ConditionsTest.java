@@ -50,4 +50,15 @@ class ConditionsTest {
             }
         });
     }
+
+    @Test
+    void evenWhenBitwiseOperatorsNormallyUsed(){
+
+        String intent = null;
+
+        Assertions.assertThrows(NullPointerException.class, () -> {
+            Boolean empty = intent != null & intent.isEmpty();
+        });
+    }
+    
 }
