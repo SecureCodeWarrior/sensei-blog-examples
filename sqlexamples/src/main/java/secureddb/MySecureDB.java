@@ -1,4 +1,4 @@
-package tododb;
+package secureddb;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -6,16 +6,16 @@ import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class MyDB {
+public class MySecureDB {
 
-    Logger logger = Logger.getLogger(MyDB.class.getName());
+    Logger logger = Logger.getLogger(MySecureDB.class.getName());
 
     private String url = "jdbc:h2:mem:";
 
     Connection dbConnection;
 
 
-    public MyDB(){
+    public MySecureDB(){
 
         try {
             dbConnection = DriverManager.getConnection(url);

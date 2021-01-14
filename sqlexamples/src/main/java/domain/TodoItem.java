@@ -1,4 +1,4 @@
-package tododb;
+package domain;
 
 public class TodoItem {
 
