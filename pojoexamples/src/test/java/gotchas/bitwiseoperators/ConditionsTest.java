@@ -45,10 +45,14 @@ class ConditionsTest {
         String args = null;
 
         Assertions.assertThrows(NullPointerException.class, () ->{
-            if (args != null & args.length() > 23) {
-                System.out.println(args);
-            }
+            actOnArgs(args);
         });
+    }
+
+    void actOnArgs(String args){
+        if (args != null & args.length() > 23) {
+            System.out.println(args);
+        }
     }
 
     @Test
