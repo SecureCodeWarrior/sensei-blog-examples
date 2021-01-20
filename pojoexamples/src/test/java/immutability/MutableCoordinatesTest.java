@@ -1,5 +1,6 @@
 package immutability;
 
+import immutability.mutable.Coordinates;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -8,7 +9,7 @@ public class MutableCoordinatesTest {
     @Test
     public void canRepositionCoords(){
 
-        MutableCoordinates position = new MutableCoordinates();
+        Coordinates position = new Coordinates();
         position.setX(3);
         position.setY(6);
 
@@ -20,7 +21,7 @@ public class MutableCoordinatesTest {
 
     @Test
     public void canTransformPositionWithoutMoving(){
-        MutableCoordinates position = new MutableCoordinates();
+        Coordinates position = new Coordinates();
         position.setX(1);
         position.setY(4);
 

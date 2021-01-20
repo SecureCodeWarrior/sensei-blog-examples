@@ -25,7 +25,8 @@ public class DbApi {
 
         try {
             Statement stm = dbConnection.createStatement();
-            ResultSet res = stm.executeQuery("SELECT description from todos where status=" + status);
+            ResultSet res = stm.executeQuery(
+                    "SELECT description from todos where status=" + status);
 
             while(res.next()){
                 todos.add(res.getString("description"));

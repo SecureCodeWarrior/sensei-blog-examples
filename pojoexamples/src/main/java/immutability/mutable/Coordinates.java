@@ -1,11 +1,11 @@
-package immutability;
+package immutability.mutable;
 
-public class MutableCoordinates {
+public class Coordinates {
 
     private int x;
     private int y;
 
-    public MutableCoordinates(){
+    public Coordinates(){
         x=0;
         y=0;
     }
