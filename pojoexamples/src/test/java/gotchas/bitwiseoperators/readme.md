@@ -8,9 +8,9 @@ e.g. a simple mistype can result in writing "&" when you really meant to write "
 
 A common heuristic we learn when reviewing code is:
 
-> "&" or "|" when used in a conditional statement in probably not intended.
+> "&" or "|" when used in a conditional statement is probably not intended.
  
-In this post we will explore this heuristic a little and identify ways we can identify and fix this.
+In this example we will explore this heuristic a little and identify ways we can identify and fix this.
 
 ## What's the Problem? Bitwise operations work fine with Booleans
 
@@ -63,9 +63,7 @@ In the above code, both boolean conditions will evaluate, because the Bitwise op
 - `args != null`
 - `args.length() > 23`
 
-When `args` is not `null`, then the code will check the length and the `if` statement will function as expected.
-
-When `args` is `null`, then the code will fail with a `NullPointerException` because `args != null` will evaluate to `false`, but the other boolean condition has to be evaluated to allow the Bitwise operation to complete, and we can't call the `length` method on a `null` Object.
+This leaves my code open to a `NullPointerException` if `args` is `null` because we will always perform the check for `args.length`, even when `args` is `null` because both boolean conditions have to be evaluated.
 
 
 ## Boolean Operators Short Circuit Evaluation
@@ -78,7 +76,11 @@ if (args != null && args.length() > 23) {
 }
 ```
 
-As soon as we know that `args != null` evaluates to `false` the condition expression evaluation stops. We don't need to evaluate the right-hand side. Whatever the outcome of the right-hand side condition, the final value of the Boolean expression will be false.
+As soon as we know that `args != null` evaluates to `false` the condition expression evaluation stops.
+
+We don't need to evaluate the right-hand side.
+
+Whatever the outcome of the right-hand side condition, the final value of the Boolean expression will be false.
 
 ## But this would never happen in production code
 
