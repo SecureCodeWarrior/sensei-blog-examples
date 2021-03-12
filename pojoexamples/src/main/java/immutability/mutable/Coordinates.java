@@ -26,9 +26,9 @@ public class Coordinates {
         return y;
     }
 
-    public void transformPositionBy(int xadjust, int yadjust){
-        this.x+=xadjust;
-        this.y+=yadjust;
+    public void transform(int xAdjust, int yAdjust){
+        this.x += xAdjust;
+        this.y += yAdjust;
     }
 
 

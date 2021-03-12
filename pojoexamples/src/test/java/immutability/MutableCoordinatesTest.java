@@ -13,7 +13,7 @@ public class MutableCoordinatesTest {
         position.setX(3);
         position.setY(6);
 
-        position.transformPositionBy(-10, 5);
+        position.transform(-10, 5);
 
         Assertions.assertEquals(-7, position.getX());
         Assertions.assertEquals(11, position.getY());
@@ -25,7 +25,7 @@ public class MutableCoordinatesTest {
         position.setX(1);
         position.setY(4);
 
-        position.transformPositionBy(0, 0);
+        position.transform(0, 0);
 
         Assertions.assertEquals(1, position.getX());
         Assertions.assertEquals(4, position.getY());
