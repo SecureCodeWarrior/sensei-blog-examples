@@ -1,69 +1,24 @@
-## Basic Immutability
+## Immutability With Sensei
 
-Immutability is often promoted as a way of avoiding entire classes of problems e.g.
+Some basic steps to creating an immutable class:
 
-- unexpected extension
-- concurrent updates
-- objects are always represent a valid state
-
+- Make constructors private and use factory methods to create objects.
+- Make fields `final`, forcing them to be instantiated in a constructor.
+- Make class `final`.
 
 Some of the basic principles of immutability are easy to adopt and Static Analysis tooling can help enforce and remind us to think about adopting those principles.
 
 In this section we will explore some simple transformations we can use to convert a mutable class to an immutable class.
 
-### A Mutable Class
-
-What follows is a very simple Co-ordinates class. It consists of two properties `x` and `y` and these are set and retrieved via methods, with the co-ordinate properties being maintained with a `transformPositionBy` method.
-
-```
-public class MutableCoordinates {
-
-    private int x;
-    private int y;
-
-    public MutableCoordinates(){
-        x=0;
-        y=0;
-    }
-
-    public void setX(int x){
-        this.x = x;
-    }
-
-    public void setY(int y){
-        this.y = y;
-    }
-
-    public int getX(){
-        return x;
-    }
-
-    public int getY(){
-        return y;
-    }
-
-    public void transformPositionBy(int xadjust, int yadjust){
-        this.x+=xadjust;
-        this.y+=yadjust;
-    }
-}
-```
-
-The basic Steps to converting this into an immutable class:
-
-- make class `final'
-- make constructors private and use factory methods to create objects
-- make fields final, forcing them to be instantiated in a constructor
-
 While it would be tempting to try and create a single recipe 'this class is mutable - fix it to be immutable'. Such a recipe would be hard to build and maintain. It is often easier to create smaller recipes to handle intermediate step transformations, and allow the programmer to make decisions about which steps to apply, rather than trying to cram a lot in an single recipe.
 
-
+Try these recipes on the `mutable` classes or when using the `AbuseOpenCoordinates` in the test folder's `immutability.exercise` package.
 
 ### Make class `final`
 
 A simple immutable class can be impacted if we can extend it.
 
-Making it `final` might help prevent that.
+Making it `final` can help prevent that.
 
 **Before:**
 
@@ -77,12 +32,12 @@ public class MutableCoordinates {
 public final class MutableCoordinates {
 ```
 
-#### Sensei Recipe
+#### Sensei Recipe to Make class `final`
 
 To warn me about this, and create a QuickFix action to help fix it I can use Sensei as follows:
 
 ```
-Name - Immutable: use final classes to prevent people extending as mutable
+Name - Immutable: use final classes to prevent extension
 Description - Make the classes final to prevent extension with a mutable subclass
 Level - Warning
 ```
@@ -93,9 +48,9 @@ Level - Warning
 search:
   class:
     allOf:
-    - modifier: "public"
+    - modifier: public
     without:
-      modifier: "final"
+      modifier: final
 ```
 
 
@@ -110,49 +65,38 @@ availableFixes:
 ```
 
 
-## Make constructors private and use static factory methods
- 
-Making the constructors private gives more control over the naming of static methods which create Objects, and also increases the ability to add caching of immutable objects if necessary e.g. the Integer class `valueOf` method maintains a cache for range `-128` to `127`.
- 
-e.g.
+### Make constructors private and use static factory methods
 
 **Before:**
 
 ```
-    public class MutableCoordinates {
-    
-        private int x;
-        private int y;
-    
-        public MutableCoordinates(){
-            x=0;
-            y=0;
-        }
-    ...
+    private int x;
+    private int y;
+
+    public Coordinates(){
+        x=0;
+        y=0;
+    }
 ```
 
 **After:**
 
 ```
-public class MutableCoordinates {
-
     private int x;
     private int y;
 
-    private MutableCoordinates(final int x, final int y ){
+    private Coordinates(final int x, final int y ){
         this.x=x;
         this.y=y;
     }
 
-    public final static MutableCoordinates create(final int x, final int y ){
-        return new MutableCoordinates(x, y );
+    public final static Coordinates create(final int x, final int y ){
+        return new Coordinates(x, y );
     }
-   ...
 ```
 
-Declaring the static method `final` might seem like a step too far, but if our class allows extension then an extending class can hide the static method. Declaring the method as `final` prevents that at compile time.
 
-#### Sensei Recipe
+#### Make constructors private and use static factory methods with a Sensei Recipe
 
 ```
 Name - Immutable: default constructor should set field values from parameters
@@ -161,7 +105,6 @@ Level - Warning
 ```
 
 In the recipe below I match on a default constructor:
-
 
 
 ```
@@ -200,31 +143,29 @@ availableFixes:
 ```
 
 
-The above recipe looks pretty complicated because of all the embedded `sed` functionality. That is simply to remove trailing `, `.
+The above recipe looks pretty complicated because of all the embedded `sed` functionality.
 
 Also I used the Mustache `foreach` construct to iterate over all the fields. When writing a `foreach` in the template it is important to use `{{` rather than `{{{` and to have no spaces when matching on the `#` i.e. `{{#containingClass.fields}}` not `{{{ #containingClass.fields }}}`- why might the 2nd representation crop up? Because when we add variables from the `Show Variables` list, in order to have the text unescaped (i.e. normal) we add it to the template as `{{{`.
 
 
-
-## Make fields `final`
-
-Making fields `final` can be a simple check on the class code to help prevent us adding any unintended side-effects in our methods, because when our fields are `final`, we can only assign them values in the constructor.
+### Making Fields `final`
 
 **Before:**
 
 ```
-    private int x;
-    private int y;
+private int x;
 ```
 
 **After:**
 
 ```
-    private final int x;
-    private final int y;
+private final int x;
 ```
 
-### Sensei Recipe
+
+#### Making Fields `final` with a Sensei Recipe
+
+This recipe is a good candidate to use with the "Fix All" Context Menu Action.
 
 ```
 Name: Immutable: Fields should be final and set in the constructor
@@ -236,7 +177,7 @@ Level: Warning
 search:
   field:
     without:
-      modifier: "final"
+      modifier: final
 ```
 
 ```
@@ -248,7 +189,7 @@ availableFixes:
       target: "self"
 ```
 
-## More Steps
+### More Steps
 
 If I applied all of the above recipes on my class I would still have some steps to implement because my code would no longer be syntactically correct.
 
@@ -264,25 +205,50 @@ Because my fields are final, my setter methods would no longer pass a syntax che
     }
 ```
 
-And my `transformPositionBy` method would fail for the same reason:
+And my `transform` method would fail for the same reason:
 
 ```
-    public void transformPositionBy(int xadjust, int yadjust){
-        this.x+=xadjust;
-        this.y+=yadjust;
+    public void transform(int xAdjust, int yAdjust){
+        this.x+=xAdjust;
+        this.y+=yAdjust;
     }
 ```
+
+Ideally I would want to remove the void methods and return a newly constructed Immutable object.
 
 ### Remove void setter methods
 
 I can automatically remove any `public` `void` setter methods, and rely on the static factory method or constructor.
 
-#### Sensei Recipe
+**Before:**
+
+```
+    public void setX(int x){
+        this.x = x;
+    }
+
+    public void setY(int y){
+        this.y = y;
+    }
+```
+
+**After:**
+
+```
+
+```
+
+_NOTE: the methods were completely removed._
+
+This is another QuickFix that is a good candidate for tryin the "Fix All" functionality.
+
+
+#### Sensei Recipe to Remove void setter methods
 
 In  my recipe I match any method with a name beginning with `set` which has been declared as `public` with a return type of `void`. And then have a rewrite action to delete the code.
 
 ```
-Name - delete public void methods
+Name - delete public void setters
 Description - void setters can be replaced with use of constructor or static factory methods
 Level - Warning
 ```
@@ -337,12 +303,38 @@ availableFixes:
 
 ### Avoid void methods
 
-`void` methods suggest that some sort of side-effect has taken place. If we want to write immutable code then `void` suggests we might have a risk in the code.f
+Void methods mean that a side-effect has probably taken place and really I want to return a new Immutable object.
 
-I will write a recipe to warn me about non-private `void` methods.
+That can be a complicated refactor because we may need to perform complex setup, so this refactoring is partial in that it just removes the `void`, triggering a syntax error to remind me that I need to return an immutable object.
 
-Given that a `void` method can be highly variable in its functionality, I will choose to replace the `void` declaration and declare the returning of an `Object` instead. This will trigger a syntax error which I as the programmer choose how to best fix in an immutable and context sensitive way.
+**Before:**
 
+```
+    public void transform(int xAdjust, int yAdjust){
+        this.x+=xAdjust;
+        this.y+=yAdjust;
+    }
+```
+
+**After:**
+
+```
+    public Object transform(int xAdjust, int yAdjust){
+        this.x+=xAdjust;
+        this.y+=yAdjust;
+    }
+```
+
+Then I would manually amend it to fix the syntax error e.g.
+
+```
+    public Coordinates transform(int xAdjust, int yAdjust){
+        return new Coordinates(this.x + xAdjust, this.y + yAdjust);
+    }
+```
+
+
+#### Avoid void methods with a Sensei Recipe
 
 ```
 Name - Immutable: avoid void methods
@@ -354,9 +346,17 @@ Level - Warning
 search:
   method:
     not:
-      modifier: "private"
-    returnType: "void"
+      modifier: private
+    in:
+      class:
+        name:
+          not:
+            matches: .*Test
+    returnType: void
 ```
+
+I added the extra check to not match in Test classes because I do often have `void` methods in Test classes for support and setup code.
+
 
 ```
 availableFixes:
@@ -366,15 +366,82 @@ availableFixes:
       type: "Object"
 ```
 
-## Summary
+### Use Getters
 
-Some of the basic concepts of immutability are simple:
+Tempting as it may be to create fields which are `public final` and avoid writing getters.
+
+Having an abstraction in place to create a longer term interface and hide the internal implementation seems like a sensible option.
+
+So I wrote a recipe to convert my `public` fields without getters to private fields with `getX` methods.
+
+**Before:**
+
+```
+public int x;
+```
+
+**After:**
+
+```
+private int x;
+
+public final int getX(){
+        return x;
+}
+```
+
+#### Use Getters With a Sensei Recipe
+
+```
+Name - Immutability: use a getter rather than public field
+Description - To encourage use of interfaces rather than direct field access, add a getter.
+Level - Warning
+```
+
+This search looks for a field which is public and not in a `typeDeclaration` which contains a child method named _getX_ (where _X_ is the name of the field).
+
+```
+search:
+  field:
+    not:
+      in:
+        typeDeclaration:
+          with:
+            child:
+              method:
+                name:
+                  caseSensitive: false
+                  is: get{{{markedElement.name}}}
+    modifier: public
+```
+
+Note: the `markedElement` gives me access to the publi field as a template.
+
+```
+availableFixes:
+- name: "add a getter and make private"
+  actions:
+  - addMethod:
+      method: "public final {{{markedElement.typeElement}}} get{{#upperCaseFirst}}{{{markedElement.name}}}{{/upperCaseFirst}}(){\n\
+        \   return {{{markedElement.name}}};\n}"
+      target: "parentClass"
+  - changeModifiers:
+      visibility: "private"
+```
+
+The QuickFix adds a 'get' method which is `public final` and returns the 'type', then changes the field visibility to `private`.
+
+### Summary
+
+Some of the basic concepts of immutability are fairly simple:
 
 - prevent extension of the class by making it `final`
 - avoid setter methods and rely on fully constructed objects either from a constructor, or a static factory method
 - avoid public `void` methods to reduce external side-effects
-- make fields final to prevent internal side-effects
+- make fields `final` to prevent internal side-effects
 
 But the correct combination of transformations to choose varies depending on the context of the class and how far we want to take immutability.
 
 To support the adoption of immutability, creating a contextual set of Sensei recipes can help flag the problem, and offer choice to the programmer about which set of transformations to apply.
+
+Use the `AbuseOpenCoordinates` class in the `test` folder in `immutability.exercise`. The tests in `AbuseOpenCoordinatesTest` should start failing as you migrate the class to become more immutable.

@@ -1,4 +1,4 @@
-package immutability;
+package immutability.mutable;
 
 import immutability.mutable.Coordinates;
 import immutability.mutable.OpenCoordinates;

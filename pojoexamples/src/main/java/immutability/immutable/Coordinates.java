@@ -14,15 +14,15 @@ public final class Coordinates {
         return new Coordinates(x, y);
     }
 
+    public Coordinates transform(final int xadjust, final int yadjust) {
+        return new Coordinates(this.x + xadjust, this.y + yadjust);
+    }
+
     public int getX() {
         return x;
     }
 
     public int getY() {
         return y;
-    }
-
-    public Coordinates transformPositionBy(final int xadjust, final int yadjust) {
-        return new Coordinates(this.x + xadjust, this.y + yadjust);
     }
 }

@@ -13,315 +13,315 @@
       "type": "947034909c9b08d0b583170e594b0eb327933231",
       "model": {
         "yamlCode": "search:\n  method:\n    name:\n      matches: SKIPTHIS.*\n",
-        "mver": 7,
+        "mver": 8,
         "yamlQuickFixCode": "availableFixes:\n- name: \"Add @Disabled and @Test Annotation\"\n  actions:\n  - addAnnotation:\n      annotation: \"@org.junit.jupiter.api.Test\"\n  - addAnnotation:\n      annotation: \"@org.junit.jupiter.api.Disabled\"\n  - rewrite:\n      to: \"{{#sed}}s/(.*) SKIPTHIS(.*)/$1 $2/,{{{.}}}{{/sed}}\"\n",
         "ruleName": "JUnit: Make @Disabled @Test from SKIPTHIS",
         "ruleID": "828cddcb-9f35-4532-9f4d-ceb0b4aee171",
         "disableRuleIDs": [],
         "ruleShortDescription": "Stop naming methods SKIPTHIS, use @Disabled @Test instead",
         "ruleErrorLevel": 2,
-        "ruleEnabled": true,
-        "ruleScope": []
+        "ruleScope": [],
+        "ruleEnabled": true
       }
     },
     {
       "type": "947034909c9b08d0b583170e594b0eb327933231",
       "model": {
-        "yamlCode": "search:\n  method:\n    annotation:\n      type: Disabled\n    in:\n      class:\n        name: SkipThisTest\n",
-        "mver": 7,
+        "yamlCode": "search:\n  method:\n    annotation:\n      type: Disabled\n    in:\n      typeDeclaration:\n        name: SkipThisTest\n",
+        "mver": 8,
         "yamlQuickFixCode": "availableFixes:\n- name: \"Remove Disabled and rename to SKIPTHIS...\"\n  actions:\n  - rewrite:\n      to: \"{{{ returnTypeElement }}} SKIPTHIS{{{ nameIdentifier }}}{{{ parameterList\\\n        \\ }}}{{{ body }}}\"\n      target: \"self\"\n- name: \"Remove Disabled, keep other annotations, and rename to SKIPTHIS...\"\n  actions:\n  - rewrite:\n      to: \"{{#sed}}s/(@Disabled\\\\n.*@Test)//,{{{ modifierList }}}{{/sed}}\\n\\n{{{ returnTypeElement\\\n        \\ }}} SKIPTHIS{{{ nameIdentifier }}}{{{ parameterList }}}{{{ body }}}\"\n      target: \"self\"\n",
         "ruleName": "JUnit: in SkipThisTest remove @Disabled and revert to SKIPTHIS",
         "ruleID": "7827bdcb-1b37-4d52-9fbe-61dae52bf377",
         "disableRuleIDs": [],
         "ruleShortDescription": "remove @Disabled and revert to SKIPTHIS for demo purposes in the project",
         "ruleErrorLevel": 1,
-        "ruleEnabled": true,
-        "ruleScope": []
+        "ruleScope": [],
+        "ruleEnabled": true
       }
     },
     {
       "type": "947034909c9b08d0b583170e594b0eb327933231",
       "model": {
-        "yamlCode": "search:\n  methodcall:\n    name: println\n    on:\n      field:\n        in:\n          class:\n            name: System\n        name: out\n",
-        "mver": 7,
+        "yamlCode": "search:\n  methodcall:\n    name: println\n    on:\n      field:\n        in:\n          typeDeclaration:\n            name: System\n        name: out\n",
+        "mver": 8,
         "yamlQuickFixCode": "availableFixes:\n- name: \"use Logger\"\n  actions:\n  - rewrite:\n      to: \"logger.log(java.util.logging.Level.INFO, {{{ arguments.0 }}})\"\n  - addField:\n      field: \"java.util.logging.Logger logger \u003d Logger.getLogger({{{ containingClass.name\\\n        \\ }}}.class.getName())\"\n      target: \"parentClass\"\n",
         "ruleName": "Logger: use logger instead of println",
         "ruleID": "246aea6d-751f-40ed-bec7-c0ee464b4952",
         "disableRuleIDs": [],
         "ruleShortDescription": "use logger instead of println - remember stop using System.out.println",
         "ruleErrorLevel": 2,
-        "ruleEnabled": true,
-        "ruleScope": []
+        "ruleScope": [],
+        "ruleEnabled": true
       }
     },
     {
       "type": "947034909c9b08d0b583170e594b0eb327933231",
       "model": {
-        "yamlCode": "search:\n  class:\n    without:\n      child:\n        field:\n          name: logger\n",
-        "mver": 7,
+        "yamlCode": "search:\n  typeDeclaration:\n    without:\n      child:\n        field:\n          name: logger\n",
+        "mver": 8,
         "yamlQuickFixCode": "availableFixes:\n- name: \"Add Logger\"\n  actions:\n  - addField:\n      field: \"java.util.logging.Logger logger \u003d Logger.getLogger({{{ containingClass.name\\\n        \\ }}}.class.getName())\"\n      target: \"self\"\n",
         "ruleName": "Logger: add logger",
         "ruleID": "9766b12a-444d-4817-95ed-d414aec8be7d",
         "disableRuleIDs": [],
         "ruleShortDescription": "Add logger to class",
         "ruleErrorLevel": 0,
-        "ruleEnabled": true,
-        "ruleScope": []
+        "ruleScope": [],
+        "ruleEnabled": true
       }
     },
     {
       "type": "947034909c9b08d0b583170e594b0eb327933231",
       "model": {
         "yamlCode": "search:\n  annotation:\n    type: org.junit.jupiter.api.Disabled\n    without:\n      parameters:\n      - {\n        }\n",
-        "mver": 7,
+        "mver": 8,
         "yamlQuickFixCode": "availableFixes:\n  - name: \"Add a todo comment parameter\"\n    actions:\n      - rewrite:\n          to: \"{{{ . }}}(\\\"TODO: add a description here\\\")\"\n          target: \"self\"\n",
         "ruleName": "remember to add disabled description",
         "ruleID": "345f6a51-012f-4613-aac2-c606fa67395a",
         "disableRuleIDs": [],
         "ruleShortDescription": "@Disabled should really have a description explaining why",
         "ruleErrorLevel": 1,
-        "ruleEnabled": true,
-        "ruleScope": []
+        "ruleScope": [],
+        "ruleEnabled": true
       }
     },
     {
       "type": "947034909c9b08d0b583170e594b0eb327933231",
       "model": {
         "yamlCode": "search:\n  annotation:\n    owner:\n      method: {\n        }\n    type: org.junit.jupiter.api.Test\n",
-        "mver": 7,
+        "mver": 8,
         "yamlQuickFixCode": "availableFixes:\n  - name: \"Learn about JUnit Annotations\"\n    actions:\n      - goto:\n          type: \"URL\"\n          value: \"https://junit.org/junit5/docs/current/user-guide/#writing-tests-annotations\"\n      - goto:\n          type: \"URL\"\n          value: \"https://junit.org/junit5/docs/current/user-guide/#writing-tests-classes-and-methods\"\n",
         "ruleName": "Junit docs link",
         "ruleID": "7d76a113-1cb9-4eef-8060-c1953ceb4333",
         "disableRuleIDs": [],
         "ruleShortDescription": "Learn about JUnit @Test method",
         "ruleErrorLevel": 0,
-        "ruleEnabled": true,
-        "ruleScope": []
+        "ruleScope": [],
+        "ruleEnabled": true
       }
     },
     {
       "type": "947034909c9b08d0b583170e594b0eb327933231",
       "model": {
         "yamlCode": "search:\n  annotation:\n    owner:\n      method: {\n        }\n    type: org.junit.jupiter.params.ParameterizedTest\n",
-        "mver": 7,
+        "mver": 8,
         "yamlQuickFixCode": "availableFixes:\n- name: \"Paramaterized Annotations (learn)\"\n  actions:\n  - goto:\n      type: \"URL\"\n      value: \"https://junit.org/junit5/docs/current/user-guide/#writing-tests-parameterized-tests\"\n- name: \"See example uses of Paramaterized Annotation\"\n  actions:\n  - goto:\n      type: \"URL\"\n      value: \"https://github.com/eviltester/junitexamples/blob/master/src/test/java/parameterized/junit5/InitialExampleTest.java\"\n",
         "ruleName": "learn about parameterized tests",
         "ruleID": "14af932a-a44c-4909-baa4-cad0f8b7551b",
         "disableRuleIDs": [],
         "ruleShortDescription": "learn about parameterized tests",
         "ruleErrorLevel": 0,
-        "ruleEnabled": true,
-        "ruleScope": []
+        "ruleScope": [],
+        "ruleEnabled": true
       }
     },
     {
       "type": "947034909c9b08d0b583170e594b0eb327933231",
       "model": {
-        "yamlCode": "search:\n  class:\n    with:\n      anyOf:\n      - child:\n          method:\n            allOf:\n            - modifier: public\n            - modifier: static\n      - child:\n          field:\n            allOf:\n            - modifier: static\n            - modifier: public\n    without:\n      child:\n        method:\n          constructor: true\n",
-        "mver": 7,
+        "yamlCode": "search:\n  typeDeclaration:\n    with:\n      anyOf:\n      - child:\n          method:\n            allOf:\n            - modifier: public\n            - modifier: static\n      - child:\n          field:\n            allOf:\n            - modifier: static\n            - modifier: public\n    without:\n      child:\n        method:\n          constructor: true\n",
+        "mver": 8,
         "yamlQuickFixCode": "availableFixes:\n  - name: \"add private constructor\"\n    actions:\n      - addMethod:\n          method: \"private {{{ name }}}(){}\"\n",
         "ruleName": "Static Classes: create private constructor",
         "ruleID": "f74ddd3f-af07-40b7-9822-fcc3e94e6c49",
         "disableRuleIDs": [],
         "ruleShortDescription": "create a private constructor for static classes",
         "ruleErrorLevel": 2,
-        "ruleEnabled": true,
-        "ruleScope": []
+        "ruleScope": [],
+        "ruleEnabled": true
       }
     },
     {
       "type": "947034909c9b08d0b583170e594b0eb327933231",
       "model": {
-        "yamlCode": "search:\n  class:\n    with:\n      child:\n        annotation:\n          type: org.junit.jupiter.api.Test\n    modifier: public\n",
-        "mver": 7,
+        "yamlCode": "search:\n  typeDeclaration:\n    with:\n      child:\n        annotation:\n          type: org.junit.jupiter.api.Test\n    modifier: public\n",
+        "mver": 8,
         "yamlQuickFixCode": "availableFixes:\n  - name: \"remove public visibility from JUnit 5  Test class\"\n    actions:\n      - changeModifiers:\n          visibility: \"\"",
         "ruleName": "Test Classes in JUnit 5 do not need to be public",
         "ruleID": "7c262a8c-d2ad-41e2-b4ea-50f37129d85b",
         "disableRuleIDs": [],
         "ruleShortDescription": "Test Classes in JUnit 5 do not need to be public",
         "ruleErrorLevel": 1,
-        "ruleEnabled": false,
-        "ruleScope": []
+        "ruleScope": [],
+        "ruleEnabled": false
       }
     },
     {
       "type": "947034909c9b08d0b583170e594b0eb327933231",
       "model": {
         "yamlCode": "search:\n  method:\n    annotation:\n      type: org.junit.jupiter.api.Test\n    modifier: public\n",
-        "mver": 7,
+        "mver": 8,
         "yamlQuickFixCode": "availableFixes:\n  - name: \"Remove @Test method public visibility\"\n    actions:\n      - changeModifiers:\n          visibility: \"\"\n",
         "ruleName": "JUnit: JUnit 5 test methods do not need to be public",
         "ruleID": "510f6589-d609-49a4-b6a9-c9fefcaeea14",
         "disableRuleIDs": [],
         "ruleShortDescription": "JUnit 5 test methods do not need public visibility",
         "ruleErrorLevel": 1,
-        "ruleEnabled": true,
-        "ruleScope": []
+        "ruleScope": [],
+        "ruleEnabled": true
       }
     },
     {
       "type": "947034909c9b08d0b583170e594b0eb327933231",
       "model": {
-        "yamlCode": "search:\n  field:\n    with:\n      annotation:\n        type: com.google.inject.Inject\n      in:\n        class:\n          without:\n            modifier: public\n",
-        "mver": 7,
+        "yamlCode": "search:\n  field:\n    with:\n      annotation:\n        type: com.google.inject.Inject\n      in:\n        typeDeclaration:\n          without:\n            modifier: public\n",
+        "mver": 8,
         "yamlQuickFixCode": "availableFixes:\n- name: \"Change class to public. Remember to also request injection on this class\"\n  actions:\n  - changeModifiers:\n      visibility: \"public\"\n      target: \"parentClass\"\n",
         "ruleName": "Guice Injected Field Not Public",
         "ruleID": "3b474a4c-c3e2-4325-bc71-e6b1ba3e2543",
         "disableRuleIDs": [],
         "ruleShortDescription": "If the Injected field is not public then the code might not be wired up.",
         "ruleErrorLevel": 1,
-        "ruleEnabled": true,
-        "ruleScope": []
+        "ruleScope": [],
+        "ruleEnabled": true
       }
     },
     {
       "type": "947034909c9b08d0b583170e594b0eb327933231",
       "model": {
         "yamlCode": "search:\n  methodcall:\n    args:\n      1:\n        containsUntrustedInput: true\n        type: java.lang.String\n    name: executeQuery\n    type: java.sql.Statement\n",
-        "mver": 7,
+        "mver": 8,
         "yamlQuickFixCode": "availableFixes:\n- name: \"convert to a prepared statement\"\n  actions:\n  - parameterize:\n      placeholderFormat: \"?\"\n      extractUntrustedInput:\n        methodsOnObject:\n          methods:\n          - methodName: \"setString\"\n            args:\n              \"1\": \"{{{ index }}}\"\n              \"2\": \"{{{ . }}}\"\n          target:\n            subject:\n              insertBefore: true\n  - changeTypeOfCallObject:\n      rewriteLastAssignment: \"{{{ qualifier }}}.prepareStatement({{{ markedElement.arguments.0}}}{{#arguments}},\\\n        \\ {{{.}}}{{/arguments}})\"\n      type: \"java.sql.PreparedStatement\"\n  - modifyArguments:\n      remove:\n      - 1\n",
         "ruleName": "sql injection - use a parameterized query",
         "ruleID": "4b70352d-5a1f-4e76-858b-33843b510de8",
         "disableRuleIDs": [],
         "ruleShortDescription": "execute query with untrusted inputs is vulnerable to SQL Injection",
         "ruleErrorLevel": 2,
-        "ruleEnabled": true,
-        "ruleScope": []
+        "ruleScope": [],
+        "ruleEnabled": true
       }
     },
     {
       "type": "947034909c9b08d0b583170e594b0eb327933231",
       "model": {
-        "yamlCode": "search:\n  class:\n    allOf:\n    - modifier: public\n    without:\n      modifier: final\n",
-        "mver": 7,
-        "yamlQuickFixCode": "availableFixes:\n- name: \"Remove public modifier and make final\"\n  actions:\n  - changeModifiers:\n      final: true\n",
+        "yamlCode": "search:\n  typeDeclaration:\n    allOf:\n    - modifier: public\n    without:\n      modifier: final\n",
+        "mver": 8,
+        "yamlQuickFixCode": "availableFixes:\n- name: \"make this final\"\n  actions:\n  - changeModifiers:\n      final: true\n",
         "ruleName": "Immutable: use final classes to prevent extension",
         "ruleID": "f9f53bb4-d447-4c45-a748-6e1b5d64f3a6",
         "disableRuleIDs": [],
         "ruleShortDescription": "Make the classes final to prevent people extending as mutable",
         "ruleErrorLevel": 1,
-        "ruleEnabled": true,
-        "ruleScope": []
+        "ruleScope": [],
+        "ruleEnabled": true
       }
     },
     {
       "type": "947034909c9b08d0b583170e594b0eb327933231",
       "model": {
-        "yamlCode": "search:\n  class:\n    modifier: public\n    anyOf:\n    - child:\n        method:\n          annotation:\n            type: Test\n",
-        "mver": 7,
+        "yamlCode": "search:\n  typeDeclaration:\n    modifier: public\n    anyOf:\n    - child:\n        method:\n          annotation:\n            type: Test\n",
+        "mver": 8,
         "yamlQuickFixCode": "availableFixes:\n- name: \"Remove public visibility from JUnit 5 Test class\"\n  actions:\n  - changeModifiers:\n      visibility: \"\"\n",
         "ruleName": "JUnit: Junit 5 Test classes do not need to be public",
         "ruleID": "cb7e426e-37af-4988-9329-eb045fda1a4e",
         "disableRuleIDs": [],
         "ruleShortDescription": "Junit 5 Test classes do not need to be public",
         "ruleErrorLevel": 1,
-        "ruleEnabled": true,
-        "ruleScope": []
+        "ruleScope": [],
+        "ruleEnabled": true
       }
     },
     {
       "type": "947034909c9b08d0b583170e594b0eb327933231",
       "model": {
         "yamlCode": "search:\n  field:\n    without:\n      modifier: final\n",
-        "mver": 7,
+        "mver": 8,
         "yamlQuickFixCode": "availableFixes:\n- name: \"make fields `final`\"\n  actions:\n  - rewrite:\n      to: \"{{{ modifierList }}} final {{{ typeElement }}} {{{ name }}};\"\n      target: \"self\"\n",
         "ruleName": "Immutable: Fields should be final and set in the constructor",
         "ruleID": "ee691ac1-5f83-4bdb-955e-2563775a3571",
         "disableRuleIDs": [],
         "ruleShortDescription": "Making fields final can highlight mutability issues",
         "ruleErrorLevel": 1,
-        "ruleEnabled": true,
-        "ruleScope": []
+        "ruleScope": [],
+        "ruleEnabled": true
       }
     },
     {
       "type": "947034909c9b08d0b583170e594b0eb327933231",
       "model": {
-        "yamlCode": "search:\n  constructor:\n    without:\n      child:\n        argument: {\n          }\n",
-        "mver": 7,
-        "yamlQuickFixCode": "availableFixes:\n- name: \"amend to private constructor that sets fields with a static factory create\\\n    \\ method\"\n  actions:\n  - rewrite:\n      to: \"private {{{ name }}}({{#sed}}{{#encodeString}}s/(.*),/$1/{{/encodeString}},{{#encodeString}}\\n\\\n        {{#containingClass.fields}}final {{typeElement}} {{name}}, {{/containingClass.fields}}{{/encodeString}}{{/sed}}){\\n\\\n        {{#containingClass.fields}}this.{{name}}\u003d{{name}};\\n        {{/containingClass.fields}}\\n\\\n        }\"\n      target: \"self\"\n  - addMethod:\n      method: \"public final static {{{ name }}} create({{#sed}}{{#encodeString}}s/(.*),/$1/{{/encodeString}},{{#encodeString}}\\n\\\n        {{#containingClass.fields}}final {{typeElement}} {{name}}, {{/containingClass.fields}}{{/encodeString}}{{/sed}}){\\n\\\n        return new {{{ name }}}({{#sed}}{{#encodeString}}s/(.*),/$1/{{/encodeString}},{{#encodeString}}{{#containingClass.fields}}{{name}},\\\n        \\ {{/containingClass.fields}}{{/encodeString}}{{/sed}});\\n}\"\n      position:\n        after:\n          constructor: {}\n      target: \"parentClass\"\n",
+        "yamlCode": "search:\n  constructor:\n    without:\n      child:\n        parameter: {}\n",
+        "mver": 8,
+        "yamlQuickFixCode": "availableFixes:\n- name: \"amend to private constructor that sets fields with a static factory create\\\n    \\ method\"\n  actions:\n  - rewrite:\n      to: \"private {{{ name }}}({{#sed}}{{#encodeString}}s/(.*),/$1/{{/encodeString}},{{#encodeString}}\\n\\\n        {{#containingClass.fields}}final {{typeElement}} {{name}}, {{/containingClass.fields}}{{/encodeString}}{{/sed}}){\\n\\\n        {{#containingClass.fields}}this.{{name}}\u003d{{name}};\\n        {{/containingClass.fields}}\\n\\\n        }\"\n      target: \"self\"\n  - addMethod:\n      method: \"public static final {{{ name }}} create({{#sed}}{{#encodeString}}s/(.*),/$1/{{/encodeString}},{{#encodeString}}\\n\\\n        {{#containingClass.fields}}final {{typeElement}} {{name}}, {{/containingClass.fields}}{{/encodeString}}{{/sed}}){\\n\\\n        return new {{{ name }}}({{#sed}}{{#encodeString}}s/(.*),/$1/{{/encodeString}},{{#encodeString}}{{#containingClass.fields}}{{name}},\\\n        \\ {{/containingClass.fields}}{{/encodeString}}{{/sed}});\\n}\"\n      position:\n        after:\n          constructor: {}\n      target: \"parentClass\"\n",
         "ruleName": "Immutable: default constructor should set field values from parameters",
         "ruleID": "aa8ad912-52ab-44c9-8e3d-b2842333f3ca",
         "disableRuleIDs": [],
         "ruleShortDescription": "avoid default constructor and create a private constructor that sets the field values",
         "ruleErrorLevel": 1,
-        "ruleEnabled": true,
-        "ruleScope": []
+        "ruleScope": [],
+        "ruleEnabled": true
       }
     },
     {
       "type": "947034909c9b08d0b583170e594b0eb327933231",
       "model": {
         "yamlCode": "search:\n  method:\n    with:\n      modifier: public\n      returnType: void\n    name:\n      matches: set.*\n",
-        "mver": 7,
+        "mver": 8,
         "yamlQuickFixCode": "availableFixes:\n- name: \"Delete The public void method\"\n  actions:\n  - rewrite:\n      to: \"\"\n      target: \"self\"\n",
         "ruleName": "Immutable: delete public void setters",
         "ruleID": "db13e8ee-dadc-4e71-9dbf-8fb5e1d3ce32",
         "disableRuleIDs": [],
         "ruleShortDescription": "void setters can be replaced with use of constructor or static factory methods",
         "ruleErrorLevel": 1,
-        "ruleEnabled": true,
-        "ruleScope": []
+        "ruleScope": [],
+        "ruleEnabled": true
       }
     },
     {
       "type": "947034909c9b08d0b583170e594b0eb327933231",
       "model": {
         "yamlCode": "search:\n  method:\n    with:\n      modifier: public\n      returnType:\n        not: void\n    name:\n      matches: set.*\n",
-        "mver": 7,
+        "mver": 8,
         "yamlQuickFixCode": "availableFixes:\n- name: \"Fix the code by manual refactoring\"\n  actions: []\n",
         "ruleName": "Immutable: avoid setters that return values",
         "ruleID": "b03a3f9d-977c-4562-8abb-fa108d85e3cf",
         "disableRuleIDs": [],
         "ruleShortDescription": "avoid setters methods that return values",
         "ruleErrorLevel": 1,
-        "ruleEnabled": true,
-        "ruleScope": []
+        "ruleScope": [],
+        "ruleEnabled": true
       }
     },
     {
       "type": "947034909c9b08d0b583170e594b0eb327933231",
       "model": {
-        "yamlCode": "search:\n  method:\n    not:\n      modifier: private\n    in:\n      class:\n        name:\n          not:\n            matches: .*Test\n    returnType: void\n",
-        "mver": 7,
+        "yamlCode": "excludeTestDirs: true\nsearch:\n  method:\n    not:\n      modifier: \"private\"\n    returnType: \"void\"\n",
+        "mver": 8,
         "yamlQuickFixCode": "availableFixes:\n- name: \"Make this return an Object\"\n  actions:\n  - changeType:\n      type: \"Object\"\n",
         "ruleName": "Immutable: avoid void methods",
         "ruleID": "395403ba-c7f2-4c03-bab5-a535260b3036",
         "disableRuleIDs": [],
         "ruleShortDescription": "void methods have side-effects, return a new oject or primitve instead",
         "ruleErrorLevel": 1,
-        "ruleEnabled": true,
-        "ruleScope": []
+        "ruleScope": [],
+        "ruleEnabled": true
       }
     },
     {
       "type": "947034909c9b08d0b583170e594b0eb327933231",
       "model": {
         "yamlCode": "search:\n  expression:\n    anyOf:\n    - in:\n        condition: {\n          }\n    value:\n      caseSensitive: false\n      matches: .* \u0026 .*\n",
-        "mver": 7,
+        "mver": 8,
         "yamlQuickFixCode": "availableFixes:\n  - name: \"Replace bitwise AND operator to logical AND operator\"\n    actions:\n      - rewrite:\n          to: \"{{#sed}}s/\u0026/\u0026\u0026/g,{{{ . }}}{{/sed}}\"\n",
         "ruleName": "Conditions: Bitwise Used Instead of Boolean",
         "ruleID": "0eaf33a8-9173-4642-96be-ee5426861d6d",
         "disableRuleIDs": [],
         "ruleShortDescription": "Check if you meant to use a Bitwise \u0026 instead of a Boolean \u0026\u0026",
         "ruleErrorLevel": 2,
-        "ruleEnabled": true,
-        "ruleScope": []
+        "ruleScope": [],
+        "ruleEnabled": true
       }
     },
     {
       "type": "947034909c9b08d0b583170e594b0eb327933231",
       "model": {
-        "yamlCode": "search:\n  field:\n    not:\n      in:\n        class:\n          with:\n            child:\n              method:\n                name:\n                  caseSensitive: false\n                  is: \"get{{{markedElement.name}}}\"\n    modifier: \"public\"\n",
-        "mver": 7,
+        "yamlCode": "search:\n  field:\n    not:\n      in:\n        typeDeclaration:\n          with:\n            child:\n              method:\n                name:\n                  caseSensitive: false\n                  is: get{{{markedElement.name}}}\n    modifier: public\n",
+        "mver": 8,
         "yamlQuickFixCode": "availableFixes:\n- name: \"add a getter and make private\"\n  actions:\n  - addMethod:\n      method: \"public final {{{markedElement.typeElement}}} get{{#upperCaseFirst}}{{{markedElement.name}}}{{/upperCaseFirst}}(){\\n\\\n        \\   return {{{markedElement.name}}};\\n}\"\n      target: \"parentClass\"\n  - changeModifiers:\n      visibility: \"private\"\n",
         "ruleName": "Immutability: use a getter rather than public field",
         "ruleID": "850cb607-579d-4dae-8d0e-3e683015d698",
         "disableRuleIDs": [],
         "ruleShortDescription": "To encourage use of interfaces rather than direct field access, add a getter.",
         "ruleErrorLevel": 1,
-        "ruleEnabled": true,
-        "ruleScope": []
+        "ruleScope": [],
+        "ruleEnabled": true
       }
     }
   ],
