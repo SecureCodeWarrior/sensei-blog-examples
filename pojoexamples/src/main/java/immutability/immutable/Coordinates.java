@@ -14,8 +14,8 @@ public final class Coordinates {
         return new Coordinates(x, y);
     }
 
-    public Coordinates transform(final int xadjust, final int yadjust) {
-        return new Coordinates(this.x + xadjust, this.y + yadjust);
+    public Coordinates transform(final int xAdjust, final int yAdjust) {
+        return new Coordinates(this.x + xAdjust, this.y + yAdjust);
     }
 
     public int getX() {
